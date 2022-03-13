@@ -37,10 +37,11 @@ class MatrizDispersa():
                         actual.izquierda = nuevo
                         break
                     elif nuevo.x == actual.x and nuevo.y == actual.y:
-                        print('Se repite: ')
-                        print('Coordenada X: ' + str(actual.x))
-                        print('Coordenada Y: ' + str(actual.y))
-                        break
+                        if nuevo.caracter == "M":
+                            actual.caracter = nuevo.caracter
+                            break
+                        else:
+                            break
                     else:
                         if actual.derecha == None:
                             actual.derecha = nuevo
@@ -67,10 +68,11 @@ class MatrizDispersa():
                         actual2.arriba = nuevo
                         break
                     elif nuevo.x == actual2.x and nuevo.y == actual2.y:
-                        print('Se repite: ')
-                        print('Coordenada X: ' + str(actual.x))
-                        print('Coordenada Y: ' + str(actual.y))
-                        break
+                        if nuevo.caracter == "M":
+                            actual.caracter = nuevo.caracter
+                            break
+                        else:
+                            break
                     else:
                         if actual2.abajo == None:
                             actual2.abajo = nuevo

@@ -30,6 +30,7 @@ def ProcesarArchivo(ruta):
                                 print('Fila No.' + str(subelement.attrib.get('fila')))
                                 print('Columna No. ' + str(subelement.attrib.get('columna')))
                                 print('Capacidad: ' + str(subelement.text))
+                                Lista_Ciudades.cola.matriz.InsertarNodo(int(subelement.attrib.get('fila')),int(subelement.attrib.get('columna')),'M')
                                 contador += 1
 
                 elif root[i].tag == "robots":
