@@ -1,13 +1,13 @@
-from NodoCabecera import NodoCabecera
-from ListaCabecera import ListaCabecera
-from NodoCelda import NodoCelda
+from .NodoCabecera import NodoCabecera
+from .ListaCabecera import ListaCabecera
+from .NodoCelda import NodoCelda
 
 class MatrizDispersa():
     def __init__(self):
-        self.filas = ListaCabecera('fila')
-        self.columnas = ListaCabecera('columna')
+        self.filas = ListaCabecera('X')
+        self.columnas = ListaCabecera('Y')
 
-    def insert(self, x, y, caracter):
+    def InsertarNodo(self, x, y, caracter):
         nuevo = NodoCelda(x, y, caracter)
         nodox = self.filas.getCabecera(x)
         nodoy = self.columnas.getCabecera(y)
@@ -79,4 +79,5 @@ class MatrizDispersa():
                         else:
                             actual2 = actual2.abajo
         
-        print('Se añadio el nuevo nodo en la coordenada ' + str(self.filas.coordenada) + ': ' + str(nuevo.x) + ', coordenada ' + str(self.columnas.coordenada)+ ': ' + str(nuevo.y)+ '\n Con el caracter: ' +str(nuevo.caracter))
+        print('Se añadio el nuevo nodo en la coordenada ' + str(self.filas.coordenada) + ': ' + str(nuevo.x) + ', coordenada ' + str(self.columnas.coordenada)+ ': ' + str(nuevo.y)+ '\n Con el caracter: "' +str(nuevo.caracter) + '"')
+

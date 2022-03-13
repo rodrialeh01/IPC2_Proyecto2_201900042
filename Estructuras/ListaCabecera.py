@@ -1,4 +1,4 @@
-from NodoCabecera import NodoCabecera
+from .NodoCabecera import NodoCabecera
 
 class ListaCabecera:
     def __init__(self, coordenada):
