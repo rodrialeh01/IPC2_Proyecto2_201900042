@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<configuracion>
+    <listaCiudades>
+        <ciudad>
+            <nombre filas="15" columnas="20">Ciudad1</nombre>
+            <fila numero="1">"********************"</fila>
+            <fila numero="2">"*** **             *"</fila>
+            <fila numero="3">"*** *****E*****C****"</fila>
+            <fila numero="4">"*** ***** ***** ***R"</fila>
+            <fila numero="5">"E                   "</fila>
+            <fila numero="6">"*** ** ** ** ** ****"</fila>
+            <fila numero="7">"*** ** ** ** ** **R*"</fila>
+            <fila numero="8">"*                  *"</fila>
+            <fila numero="9">"*** ** ** ** ** ****"</fila>
+            <fila numero="10">"*** ** ** ** ** ****"</fila>
+            <fila numero="11">"***                *"</fila>
+            <fila numero="12">"*** ** ** ** ** ****"</fila>
+            <fila numero="13">"*** **  E ** *R ****"</fila>
+            <fila numero="14">"*** *****         C*"</fila>
+            <fila numero="15">"*** *****C***** ****"</fila>
+            <unidadMilitar fila="5" columna="14">20</unidadMilitar>
+            <unidadMilitar fila="5" columna="19">20</unidadMilitar>
+            <unidadMilitar fila="5" columna="20">20</unidadMilitar>
+            <unidadMilitar fila="8" columna="16">20</unidadMilitar>
+            <unidadMilitar fila="11" columna="7">20</unidadMilitar>
+            <unidadMilitar fila="11" columna="14">20</unidadMilitar>
+            <unidadMilitar fila="14" columna="10">20</unidadMilitar>
+        </ciudad>
+    </listaCiudades>
+    <robots>
+        <robot>
+            <nombre tipo="ChapinFighter" capacidad="100">robot01</nombre>
+            <nombre tipo="ChapinRescue">robot02</nombre> 
+        </robot>
+    </robots>
+</configuracion>
