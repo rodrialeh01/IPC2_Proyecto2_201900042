@@ -43,6 +43,14 @@ class ListaCabecera:
             print('Coordenada '+ self.coordenada + ' -> '+ str(actual.id))
             actual = actual.siguiente
 
+    def getCabecera(self, id):
+        actual = self.cabeza
+        while actual != None:
+            if id == actual.id:
+                return actual
+            actual = actual.siguiente
+
+'''
 filas = ListaCabecera('X')
 n8 = NodoCabecera(8)
 n6 = NodoCabecera(6)
@@ -55,3 +63,4 @@ filas.InsertarNodoCabecera(n10)
 filas.InsertarNodoCabecera(n7)
 filas.InsertarNodoCabecera(n9)
 filas.mostrarCabeceras()
+'''
