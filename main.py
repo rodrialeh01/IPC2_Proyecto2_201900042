@@ -123,7 +123,7 @@ def MostrarCiudad():
     global Lista_Ciudades
     global cociudades
     if Lista_Ciudades.retornarNodo(cociudades.get()) != None:
-        messagebox.showinfo("Exito","Si existe la Ciudad y tiene" + str(Lista_Ciudades.retornarNodo(cociudades.get()).filas) + ' filas y '+ str(Lista_Ciudades.retornarNodo(cociudades.get()).columnas))
+        messagebox.showinfo("Exito","Si existe la Ciudad y tiene" + str(Lista_Ciudades.retornarNodo(cociudades.get()).filas) + ' filas y '+ str(Lista_Ciudades.retornarNodo(cociudades.get()).columnas) + ' columnas')
         MostrarTR()
         Lista_Ciudades.GraficarMatriz(Lista_Ciudades.retornarNodo(cociudades.get()))
         CargarImagen()
@@ -132,6 +132,7 @@ def MostrarCiudad():
         messagebox.showinfo("Error","No ha seleccionado ninguna opcion")
     else:
         messagebox.showinfo("Error","No existe :(")
+
 
 def CargarImagen():
     global imgCargar
@@ -195,7 +196,12 @@ def MostrarRobot():
     global corobot
     global Lista_Robots
     if Lista_Robots.RetornarRobot(corobot.get()) != None:
-        messagebox.showinfo("Exito","Si existe el Robot")
+        if Lista_Robots.RetornarRobot(corobot.get()).tipo == 'ChapinFighter':
+            prueba = messagebox.askyesno(title="Robot de Combate", message="El robot seleccionado contiene la capacidad de "+str(Lista_Robots.RetornarRobot(corobot.get()).capacidad) + " unidades\n Desea continuar con la mision?")
+            if prueba == True:
+                print('Holi')
+        elif Lista_Robots.RetornarRobot(corobot.get()).tipo == 'ChapinRescue':
+            messagebox.showinfo("Exito","Si existe el Robot")
     elif corobot.get() == "":
         messagebox.showinfo("Error","No ha seleccionado ninguna opcion")
     else:
