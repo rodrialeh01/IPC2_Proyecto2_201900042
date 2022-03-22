@@ -1,8 +1,11 @@
 from xml.etree import ElementTree as et
 from Estructuras.ListaCiudades import ListaCiudades
-
+from Estructuras.ListaRobots import ListaRobots
 Lista_Ciudades = ListaCiudades()
+Lista_Robots = ListaRobots()
 def ProcesarArchivo(ruta):
+    global Lista_Ciudades
+    global Lista_Robots
     if ruta != "":
             archivo = et.parse(ruta)
             root = archivo.getroot()
@@ -22,7 +25,7 @@ def ProcesarArchivo(ruta):
                                 contadorc = 1
                                 contenido = subelement.text.split('"')
                                 for caracter in contenido[1]:
-                                    Lista_Ciudades.cola.matriz.InsertarNodo(int(subelement.attrib.get('numero')),contadorc,caracter)
+                                    Lista_Ciudades.cola.matriz.InsertarNodo(int(subelement.attrib.get('numero')),contadorc,caracter,0)
                                     contadorc+=1
                             elif subelement.tag == "unidadMilitar":
                                 print('--------------------------')
@@ -30,7 +33,8 @@ def ProcesarArchivo(ruta):
                                 print('Fila No.' + str(subelement.attrib.get('fila')))
                                 print('Columna No. ' + str(subelement.attrib.get('columna')))
                                 print('Capacidad: ' + str(subelement.text))
-                                Lista_Ciudades.cola.matriz.InsertarNodo(int(subelement.attrib.get('fila')),int(subelement.attrib.get('columna')),'M')
+                                capacidad = int(subelement.text)
+                                Lista_Ciudades.cola.matriz.InsertarNodo(int(subelement.attrib.get('fila')),int(subelement.attrib.get('columna')),'M',capacidad)
                                 contador += 1
 
                 elif root[i].tag == "robots":
@@ -42,5 +46,11 @@ def ProcesarArchivo(ruta):
                             print('Tipo: ' + str(subelement.attrib.get('tipo')))
                             if subelement.attrib.get('tipo') == "ChapinFighter":
                                 print('Capacidad: '+str(subelement.attrib.get('capacidad')))
+                                cap = int(subelement.attrib.get('capacidad'))
+                                Lista_Robots.agregarNodo(str(subelement.attrib.get('tipo')),str(subelement.text),cap)
+                            elif subelement.attrib.get('tipo') == "ChapinRescue":
+                                Lista_Robots.agregarNodo(str(subelement.attrib.get('tipo')),str(subelement.text),0)
+
+
 
 ProcesarArchivo('Archivos de Prueba\Prueba1.xml')

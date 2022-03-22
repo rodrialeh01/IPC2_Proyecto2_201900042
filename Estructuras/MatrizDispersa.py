@@ -7,8 +7,8 @@ class MatrizDispersa():
         self.filas = ListaCabecera('X')
         self.columnas = ListaCabecera('Y')
 
-    def InsertarNodo(self, x, y, caracter):
-        nuevo = NodoCelda(x, y, caracter)
+    def InsertarNodo(self, x, y, caracter, capacidad):
+        nuevo = NodoCelda(x, y, caracter, capacidad)
         nodox = self.filas.getCabecera(x)
         nodoy = self.columnas.getCabecera(y)
 
