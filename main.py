@@ -16,18 +16,18 @@ Lista_Robots = ListaRobots()
 #VENTANA
 ventana = tk.Tk()
 ventana.title('Chapin-Warriors App')
-ventana.geometry('1250x680')
+ventana.geometry('1250x690')
 ventana.resizable(0,0)
-ventana.config(bg='#9A0219')
+ventana.config(bg='#C8881F')
 ventana.iconbitmap('icono.ico')
 
 #LABEL
-labelprincipal = Label(ventana, text='Chapin-Warriors', font='CenturyGothic 20 bold', fg='white', bg='#9A0219')
+labelprincipal = Label(ventana, text='Chapin-Warriors', font='CenturyGothic 20 bold', fg='white', bg='#C8881F')
 labelprincipal.place(x=110,y=25)
 
 #IMAGEN DE LOGO
 imagen = ImageTk.PhotoImage(Image.open('icono.ico').resize((60,60)))
-ilabel = Label(image=imagen, bg='#9A0219')
+ilabel = Label(image=imagen, bg='#C8881F')
 ilabel.place(x=50, y=10)
 
 #-------------------------------------------------------------------------
@@ -99,12 +99,12 @@ def CargarArchivo():
 botoncargar = Button(ventana,text='Cargar Archivo', font='arial 15', bg="white", command=CargarArchivo)
 botoncargar.place(x=1050,y=25)
 
-label1 = Label(ventana, text='Selecciona una ciudad:', font='CenturyGothic 15', fg='white', bg='#9A0219')
-label1.place(x=40,y=150)
+label1 = Label(ventana, text='Selecciona una ciudad:', font='CenturyGothic 15', fg='black', bg='#C8881F')
+label1.place(x=40,y=100)
 
 #COMBOBOX DE CIUDADES
 cociudades = ttk.Combobox(state='readonly')
-cociudades.place(x=40,y=190)
+cociudades.place(x=40,y=140)
 
 def agregar():
     global Lista_Ciudades
@@ -127,6 +127,7 @@ def MostrarCiudad():
         MostrarTR()
         Lista_Ciudades.GraficarMatriz(Lista_Ciudades.retornarNodo(cociudades.get()))
         CargarImagen()
+        labels()
     elif cociudades.get() == "":
         messagebox.showinfo("Error","No ha seleccionado ninguna opcion")
     else:
@@ -140,18 +141,18 @@ def CargarImagen():
     imlabel.place(x=350, y=100)
 
 botonverc = Button(ventana,text='Mostrar Ciudad', font='CenturyGothic 11', bg="white", command=MostrarCiudad)
-botonverc.place(x=40,y=250)
+botonverc.place(x=40,y=190)
 
 corobotst = None
 
 #COMBOBOX DE TIPOS DE ROBOTS
 def MostrarTR():
     global corobotst
-    label3 = Label(ventana, text='Selecciona un tipo de robot:', font='CenturyGothic 15', fg='white', bg='#9A0219')
-    label3.place(x=40,y=300)
+    label3 = Label(ventana, text='Selecciona un tipo de robot:', font='CenturyGothic 15', fg='black', bg='#C8881F')
+    label3.place(x=40,y=240)
 
     corobotst = ttk.Combobox(state='readonly')
-    corobotst.place(x=40,y=340)
+    corobotst.place(x=40,y=280)
     corobotst['values']= ['ChapinFighter', 'ChapinRescue']
     corobotst.config(font='arial 12')
     bot1()
@@ -171,16 +172,16 @@ def tipoR():
 
 def bot1():
     botonr1 = Button(ventana,text='Elegir Tipo', font='CenturyGothic 11', bg="white", command=tipoR)
-    botonr1.place(x=40,y=380)
+    botonr1.place(x=40,y=320)
 
 corobot = None
 def RobotS(tipo):
     global corobot
-    label2 = Label(ventana, text='Selecciona un Robot:', font='CenturyGothic 15', fg='white', bg='#9A0219')
-    label2.place(x=40,y=420)
+    label2 = Label(ventana, text='Selecciona un Robot:', font='CenturyGothic 15', fg='black', bg='#C8881F')
+    label2.place(x=40,y=360)
 
     corobot = ttk.Combobox(state='readonly')
-    corobot.place(x=40,y=460)
+    corobot.place(x=40,y=400)
     agregarR(tipo)
 
 def agregarR(tipo):
@@ -202,10 +203,47 @@ def MostrarRobot():
 
 def bot2():
     botonr2 = Button(ventana,text='Realizar Mision de Rescate', font='CenturyGothic 11', bg="white", command=MostrarRobot)
-    botonr2.place(x=40,y=500)
+    botonr2.place(x=40,y=440)
 
 def bot3():
     botonr3 = Button(ventana,text='Realizar Mision de Extraccion de Recursos', font='CenturyGothic 11', bg="white", command=MostrarRobot)
-    botonr3.place(x=40,y=500)
+    botonr3.place(x=40,y=440)
+
+def labels():
+    lblc0 = Label(ventana, text='***', font='CenturyGothic 10', fg='black', bg='black')
+    lblc0.place(x=40,y=500)
+
+    lblc00 = Label(ventana, text='Intransitable', font='CenturyGothic 12 bold', fg='black', bg='#C8881F')
+    lblc00.place(x=70,y=495)
+
+    lblc1 = Label(ventana, text='***', font='CenturyGothic 10', fg='#54DA22', bg='#54DA22')
+    lblc1.place(x=40,y=530)
+
+    lblc10 = Label(ventana, text='Punto de Entrada', font='CenturyGothic 12 bold', fg='black', bg='#C8881F')
+    lblc10.place(x=70,y=530)
+
+    lblc2 = Label(ventana, text='***', font='CenturyGothic 10', fg='white', bg='white')
+    lblc2.place(x=40,y=560)
+
+    lblc20 = Label(ventana, text='Camino', font='CenturyGothic 12 bold', fg='black', bg='#C8881F')
+    lblc20.place(x=70,y=560)
+
+    lblc3 = Label(ventana, text='***', font='CenturyGothic 10', fg='#9A0219', bg='#9A0219')
+    lblc3.place(x=40,y=590)
+
+    lblc30 = Label(ventana, text='Unidad Militar', font='CenturyGothic 12 bold', fg='black', bg='#C8881F')
+    lblc30.place(x=70,y=590)
+
+    lblc4 = Label(ventana, text='***', font='CenturyGothic 10', fg='#326CD8', bg='#326CD8')
+    lblc4.place(x=40,y=620)
+
+    lblc40 = Label(ventana, text='Unidad Civil', font='CenturyGothic 12 bold', fg='black', bg='#C8881F')
+    lblc40.place(x=70,y=620)
+
+    lblc5 = Label(ventana, text='***', font='CenturyGothic 10', fg='#9699A0', bg='#9699A0')
+    lblc5.place(x=40,y=650)
+
+    lblc40 = Label(ventana, text='Recurso', font='CenturyGothic 12 bold', fg='black', bg='#C8881F')
+    lblc40.place(x=70,y=650)
 
 ventana.mainloop()
