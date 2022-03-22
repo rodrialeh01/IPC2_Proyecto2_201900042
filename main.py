@@ -79,18 +79,22 @@ def ProcesarArchivo(ruta):
                             elif subelement.attrib.get('tipo') == "ChapinRescue":
                                 Lista_Robots.agregarNodo(str(subelement.attrib.get('tipo')),str(subelement.text),0)
 
+#ABRE UNA VENTANA PARA ELEGIR EL ARCHIVO
 def Ruta():
     ruta = filedialog.askopenfilename(title='Cargar Archivo', filetypes = (("Text files", "*.xml*"), ("all files", "*.*")))
     return ruta
 
 def CargarArchivo():
     ruta = Ruta()
-    if ruta != "":
-        ProcesarArchivo(ruta)
-        agregar()
-        messagebox.showinfo("Exito","Se cargó el archivo")
-    else:
-        messagebox.showinfo("Error","No se cargó ningun archivo")
+    try:
+        if ruta != "":
+            ProcesarArchivo(ruta)
+            agregar()
+            messagebox.showinfo("Exito","Se cargó el archivo")
+        else:
+            messagebox.showinfo("Error","No se cargó ningun archivo")
+    except:
+        messagebox.showinfo("Error","Hubo un error al procesar el archivo")
 
 botoncargar = Button(ventana,text='Cargar Archivo', font='arial 15', bg="white", command=CargarArchivo)
 botoncargar.place(x=1050,y=25)
@@ -99,7 +103,7 @@ label1 = Label(ventana, text='Selecciona una ciudad:', font='CenturyGothic 15', 
 label1.place(x=40,y=150)
 
 #COMBOBOX DE CIUDADES
-cociudades = ttk.Combobox()
+cociudades = ttk.Combobox(state='readonly')
 cociudades.place(x=40,y=190)
 
 def agregar():
@@ -112,16 +116,28 @@ def agregar():
     cociudades['values']= mostrar
     cociudades.config(font='arial 12')
 
+namemat = ''
+imgCargar = None
+imlabel = None
 def MostrarCiudad():
     global Lista_Ciudades
     global cociudades
     if Lista_Ciudades.retornarNodo(cociudades.get()) != None:
         messagebox.showinfo("Exito","Si existe la Ciudad y tiene" + str(Lista_Ciudades.retornarNodo(cociudades.get()).filas) + ' filas y '+ str(Lista_Ciudades.retornarNodo(cociudades.get()).columnas))
         MostrarTR()
+        Lista_Ciudades.GraficarMatriz(Lista_Ciudades.retornarNodo(cociudades.get()))
+        CargarImagen()
     elif cociudades.get() == "":
         messagebox.showinfo("Error","No ha seleccionado ninguna opcion")
     else:
         messagebox.showinfo("Error","No existe :(")
+
+def CargarImagen():
+    global imgCargar
+    global imlabel
+    imgCargar=ImageTk.PhotoImage(Image.open('MapasGenerados/Matriz_'+cociudades.get()+'.png').resize((850,550)))
+    imlabel = Label(image=imgCargar)
+    imlabel.place(x=350, y=100)
 
 botonverc = Button(ventana,text='Mostrar Ciudad', font='CenturyGothic 11', bg="white", command=MostrarCiudad)
 botonverc.place(x=40,y=250)
@@ -134,7 +150,7 @@ def MostrarTR():
     label3 = Label(ventana, text='Selecciona un tipo de robot:', font='CenturyGothic 15', fg='white', bg='#9A0219')
     label3.place(x=40,y=300)
 
-    corobotst = ttk.Combobox()
+    corobotst = ttk.Combobox(state='readonly')
     corobotst.place(x=40,y=340)
     corobotst['values']= ['ChapinFighter', 'ChapinRescue']
     corobotst.config(font='arial 12')
@@ -144,8 +160,10 @@ def tipoR():
     global corobotst
     if corobotst.get()=="ChapinFighter":
         RobotS(corobotst.get())
+        bot2()
     elif corobotst.get()=="ChapinRescue":
         RobotS(corobotst.get())
+        bot3()
     elif corobotst.get()=="":
         messagebox.showinfo("Error","No ha seleccionado ninguna opcion")
     else:
@@ -161,10 +179,9 @@ def RobotS(tipo):
     label2 = Label(ventana, text='Selecciona un Robot:', font='CenturyGothic 15', fg='white', bg='#9A0219')
     label2.place(x=40,y=420)
 
-    corobot = ttk.Combobox()
+    corobot = ttk.Combobox(state='readonly')
     corobot.place(x=40,y=460)
     agregarR(tipo)
-    bot2()
 
 def agregarR(tipo):
     global Lista_Robots
@@ -184,7 +201,11 @@ def MostrarRobot():
         messagebox.showinfo("Error","No existe :(")
 
 def bot2():
-    botonr2 = Button(ventana,text='Elegir Robot', font='CenturyGothic 11', bg="white", command=MostrarRobot)
+    botonr2 = Button(ventana,text='Realizar Mision de Rescate', font='CenturyGothic 11', bg="white", command=MostrarRobot)
     botonr2.place(x=40,y=500)
+
+def bot3():
+    botonr3 = Button(ventana,text='Realizar Mision de Extraccion de Recursos', font='CenturyGothic 11', bg="white", command=MostrarRobot)
+    botonr3.place(x=40,y=500)
 
 ventana.mainloop()

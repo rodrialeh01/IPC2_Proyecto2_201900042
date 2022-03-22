@@ -83,3 +83,14 @@ class MatrizDispersa():
         
         print('Se añadio el nuevo nodo en la coordenada ' + str(self.filas.coordenada) + ': ' + str(nuevo.x) + ', coordenada ' + str(self.columnas.coordenada)+ ': ' + str(nuevo.y)+ '\n Con el caracter: "' +str(nuevo.caracter) + '"')
 
+    def retornarNodo(self, fila, columna):
+        try:
+            tmp : NodoCelda = self.filas.getCabecera(fila).indicador
+            while tmp != None:
+                if tmp.x == fila and tmp.y == columna:
+                    return tmp
+                tmp = tmp.derecha
+            return None
+        except:
+            print('Coordenada no encontrada')
+            return None

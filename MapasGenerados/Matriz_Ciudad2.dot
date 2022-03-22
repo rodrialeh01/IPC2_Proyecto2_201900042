@@ -1,0 +1,338 @@
+digraph structs {
+	node [shape=plaintext]
+	patron [fontsize="40pt", label=<
+<TABLE BORDER="0" CELLBORDER="0" CELLSPACING="2" CELLPADDING="20">
+<TR>
+    <TD border="0">Ciudad2</TD><TD border="0">1</TD><TD border="0">2</TD><TD border="0">3</TD><TD border="0">4</TD><TD border="0">5</TD><TD border="0">6</TD><TD border="0">7</TD><TD border="0">8</TD><TD border="0">9</TD><TD border="0">10</TD><TD border="0">11</TD><TD border="0">12</TD><TD border="0">13</TD><TD border="0">14</TD><TD border="0">15</TD><TD border="0">16</TD><TD border="0">17</TD><TD border="0">18</TD><TD border="0">19</TD><TD border="0">20</TD>
+</TR>
+<TR>
+        <TD border="0">1</TD>
+<TD bgcolor="black">   </TD>
+<TD bgcolor="black">   </TD>
+<TD bgcolor="black">   </TD>
+<TD bgcolor="black">   </TD>
+<TD bgcolor="black">   </TD>
+<TD bgcolor="black">   </TD>
+<TD bgcolor="black">   </TD>
+<TD bgcolor="black">   </TD>
+<TD bgcolor="black">   </TD>
+<TD bgcolor="black">   </TD>
+<TD bgcolor="black">   </TD>
+<TD bgcolor="black">   </TD>
+<TD bgcolor="black">   </TD>
+<TD bgcolor="black">   </TD>
+<TD bgcolor="black">   </TD>
+<TD bgcolor="black">   </TD>
+<TD bgcolor="black">   </TD>
+<TD bgcolor="black">   </TD>
+<TD bgcolor="black">   </TD>
+<TD bgcolor="black">   </TD></TR>
+<TR>
+        <TD border="0">2</TD>
+<TD bgcolor="black">   </TD>
+<TD bgcolor="black">   </TD>
+<TD bgcolor="black">   </TD>
+<TD>   </TD>
+<TD bgcolor="black">   </TD>
+<TD bgcolor="black">   </TD>
+<TD>   </TD>
+<TD>   </TD>
+<TD>   </TD>
+<TD>   </TD>
+<TD>   </TD>
+<TD>   </TD>
+<TD>   </TD>
+<TD>   </TD>
+<TD>   </TD>
+<TD>   </TD>
+<TD>   </TD>
+<TD>   </TD>
+<TD>   </TD>
+<TD bgcolor="black">   </TD></TR>
+<TR>
+        <TD border="0">3</TD>
+<TD bgcolor="black">   </TD>
+<TD bgcolor="black">   </TD>
+<TD bgcolor="black">   </TD>
+<TD>   </TD>
+<TD bgcolor="black">   </TD>
+<TD bgcolor="black">   </TD>
+<TD bgcolor="black">   </TD>
+<TD bgcolor="black">   </TD>
+<TD bgcolor="black">   </TD>
+<TD bgcolor="yellowgreen">   </TD>
+<TD bgcolor="black">   </TD>
+<TD bgcolor="black">   </TD>
+<TD bgcolor="black">   </TD>
+<TD bgcolor="black">   </TD>
+<TD bgcolor="black">   </TD>
+<TD bgcolor="royalblue1">   </TD>
+<TD bgcolor="black">   </TD>
+<TD bgcolor="black">   </TD>
+<TD bgcolor="black">   </TD>
+<TD bgcolor="black">   </TD></TR>
+<TR>
+        <TD border="0">4</TD>
+<TD bgcolor="black">   </TD>
+<TD bgcolor="black">   </TD>
+<TD bgcolor="black">   </TD>
+<TD>   </TD>
+<TD bgcolor="black">   </TD>
+<TD bgcolor="black">   </TD>
+<TD bgcolor="black">   </TD>
+<TD bgcolor="black">   </TD>
+<TD bgcolor="black">   </TD>
+<TD>   </TD>
+<TD bgcolor="black">   </TD>
+<TD bgcolor="black">   </TD>
+<TD bgcolor="black">   </TD>
+<TD bgcolor="black">   </TD>
+<TD bgcolor="black">   </TD>
+<TD>   </TD>
+<TD bgcolor="black">   </TD>
+<TD bgcolor="black">   </TD>
+<TD bgcolor="black">   </TD>
+<TD bgcolor="grey39">   </TD></TR>
+<TR>
+        <TD border="0">5</TD>
+<TD bgcolor="yellowgreen">   </TD>
+<TD>   </TD>
+<TD>   </TD>
+<TD>   </TD>
+<TD>   </TD>
+<TD>   </TD>
+<TD>   </TD>
+<TD>   </TD>
+<TD>   </TD>
+<TD>   </TD>
+<TD>   </TD>
+<TD>   </TD>
+<TD>   </TD>
+<TD bgcolor="red3">   </TD>
+<TD>   </TD>
+<TD>   </TD>
+<TD>   </TD>
+<TD>   </TD>
+<TD bgcolor="red3">   </TD>
+<TD bgcolor="red3">   </TD></TR>
+<TR>
+        <TD border="0">6</TD>
+<TD bgcolor="black">   </TD>
+<TD bgcolor="black">   </TD>
+<TD bgcolor="black">   </TD>
+<TD>   </TD>
+<TD bgcolor="black">   </TD>
+<TD bgcolor="black">   </TD>
+<TD>   </TD>
+<TD bgcolor="black">   </TD>
+<TD bgcolor="black">   </TD>
+<TD>   </TD>
+<TD bgcolor="black">   </TD>
+<TD bgcolor="black">   </TD>
+<TD>   </TD>
+<TD bgcolor="black">   </TD>
+<TD bgcolor="black">   </TD>
+<TD>   </TD>
+<TD bgcolor="black">   </TD>
+<TD bgcolor="black">   </TD>
+<TD bgcolor="black">   </TD>
+<TD bgcolor="black">   </TD></TR>
+<TR>
+        <TD border="0">7</TD>
+<TD bgcolor="black">   </TD>
+<TD bgcolor="black">   </TD>
+<TD bgcolor="black">   </TD>
+<TD>   </TD>
+<TD bgcolor="black">   </TD>
+<TD bgcolor="black">   </TD>
+<TD>   </TD>
+<TD bgcolor="black">   </TD>
+<TD bgcolor="black">   </TD>
+<TD>   </TD>
+<TD bgcolor="black">   </TD>
+<TD bgcolor="black">   </TD>
+<TD>   </TD>
+<TD bgcolor="black">   </TD>
+<TD bgcolor="black">   </TD>
+<TD>   </TD>
+<TD bgcolor="black">   </TD>
+<TD bgcolor="black">   </TD>
+<TD bgcolor="grey39">   </TD>
+<TD bgcolor="black">   </TD></TR>
+<TR>
+        <TD border="0">8</TD>
+<TD bgcolor="black">   </TD>
+<TD>   </TD>
+<TD>   </TD>
+<TD>   </TD>
+<TD>   </TD>
+<TD>   </TD>
+<TD>   </TD>
+<TD>   </TD>
+<TD>   </TD>
+<TD>   </TD>
+<TD>   </TD>
+<TD>   </TD>
+<TD>   </TD>
+<TD>   </TD>
+<TD>   </TD>
+<TD bgcolor="red3">   </TD>
+<TD>   </TD>
+<TD>   </TD>
+<TD>   </TD>
+<TD bgcolor="black">   </TD></TR>
+<TR>
+        <TD border="0">9</TD>
+<TD bgcolor="black">   </TD>
+<TD bgcolor="black">   </TD>
+<TD bgcolor="black">   </TD>
+<TD>   </TD>
+<TD bgcolor="black">   </TD>
+<TD bgcolor="black">   </TD>
+<TD>   </TD>
+<TD bgcolor="black">   </TD>
+<TD bgcolor="black">   </TD>
+<TD>   </TD>
+<TD bgcolor="black">   </TD>
+<TD bgcolor="black">   </TD>
+<TD>   </TD>
+<TD bgcolor="black">   </TD>
+<TD bgcolor="black">   </TD>
+<TD>   </TD>
+<TD bgcolor="black">   </TD>
+<TD bgcolor="black">   </TD>
+<TD bgcolor="black">   </TD>
+<TD bgcolor="black">   </TD></TR>
+<TR>
+        <TD border="0">10</TD>
+<TD bgcolor="black">   </TD>
+<TD bgcolor="black">   </TD>
+<TD bgcolor="black">   </TD>
+<TD>   </TD>
+<TD bgcolor="black">   </TD>
+<TD bgcolor="black">   </TD>
+<TD>   </TD>
+<TD bgcolor="black">   </TD>
+<TD bgcolor="black">   </TD>
+<TD>   </TD>
+<TD bgcolor="black">   </TD>
+<TD bgcolor="black">   </TD>
+<TD>   </TD>
+<TD bgcolor="black">   </TD>
+<TD bgcolor="black">   </TD>
+<TD>   </TD>
+<TD bgcolor="black">   </TD>
+<TD bgcolor="black">   </TD>
+<TD bgcolor="black">   </TD>
+<TD bgcolor="black">   </TD></TR>
+<TR>
+        <TD border="0">11</TD>
+<TD bgcolor="black">   </TD>
+<TD bgcolor="black">   </TD>
+<TD bgcolor="black">   </TD>
+<TD>   </TD>
+<TD>   </TD>
+<TD>   </TD>
+<TD bgcolor="red3">   </TD>
+<TD>   </TD>
+<TD>   </TD>
+<TD>   </TD>
+<TD>   </TD>
+<TD>   </TD>
+<TD>   </TD>
+<TD bgcolor="red3">   </TD>
+<TD>   </TD>
+<TD>   </TD>
+<TD>   </TD>
+<TD>   </TD>
+<TD>   </TD>
+<TD bgcolor="black">   </TD></TR>
+<TR>
+        <TD border="0">12</TD>
+<TD bgcolor="black">   </TD>
+<TD bgcolor="black">   </TD>
+<TD bgcolor="black">   </TD>
+<TD>   </TD>
+<TD bgcolor="black">   </TD>
+<TD bgcolor="black">   </TD>
+<TD>   </TD>
+<TD bgcolor="black">   </TD>
+<TD bgcolor="black">   </TD>
+<TD>   </TD>
+<TD bgcolor="black">   </TD>
+<TD bgcolor="black">   </TD>
+<TD>   </TD>
+<TD bgcolor="black">   </TD>
+<TD bgcolor="black">   </TD>
+<TD>   </TD>
+<TD bgcolor="black">   </TD>
+<TD bgcolor="black">   </TD>
+<TD bgcolor="black">   </TD>
+<TD bgcolor="black">   </TD></TR>
+<TR>
+        <TD border="0">13</TD>
+<TD bgcolor="black">   </TD>
+<TD bgcolor="black">   </TD>
+<TD bgcolor="black">   </TD>
+<TD>   </TD>
+<TD bgcolor="black">   </TD>
+<TD bgcolor="black">   </TD>
+<TD>   </TD>
+<TD>   </TD>
+<TD bgcolor="yellowgreen">   </TD>
+<TD>   </TD>
+<TD bgcolor="black">   </TD>
+<TD bgcolor="black">   </TD>
+<TD>   </TD>
+<TD bgcolor="black">   </TD>
+<TD bgcolor="grey39">   </TD>
+<TD>   </TD>
+<TD bgcolor="black">   </TD>
+<TD bgcolor="black">   </TD>
+<TD bgcolor="black">   </TD>
+<TD bgcolor="black">   </TD></TR>
+<TR>
+        <TD border="0">14</TD>
+<TD bgcolor="black">   </TD>
+<TD bgcolor="black">   </TD>
+<TD bgcolor="black">   </TD>
+<TD>   </TD>
+<TD bgcolor="black">   </TD>
+<TD bgcolor="black">   </TD>
+<TD bgcolor="black">   </TD>
+<TD bgcolor="black">   </TD>
+<TD bgcolor="black">   </TD>
+<TD bgcolor="red3">   </TD>
+<TD>   </TD>
+<TD>   </TD>
+<TD>   </TD>
+<TD>   </TD>
+<TD>   </TD>
+<TD>   </TD>
+<TD>   </TD>
+<TD>   </TD>
+<TD bgcolor="royalblue1">   </TD>
+<TD bgcolor="black">   </TD></TR>
+<TR>
+        <TD border="0">15</TD>
+<TD bgcolor="black">   </TD>
+<TD bgcolor="black">   </TD>
+<TD bgcolor="black">   </TD>
+<TD>   </TD>
+<TD bgcolor="black">   </TD>
+<TD bgcolor="black">   </TD>
+<TD bgcolor="black">   </TD>
+<TD bgcolor="black">   </TD>
+<TD bgcolor="black">   </TD>
+<TD bgcolor="royalblue1">   </TD>
+<TD bgcolor="black">   </TD>
+<TD bgcolor="black">   </TD>
+<TD bgcolor="black">   </TD>
+<TD bgcolor="black">   </TD>
+<TD bgcolor="black">   </TD>
+<TD>   </TD>
+<TD bgcolor="black">   </TD>
+<TD bgcolor="black">   </TD>
+<TD bgcolor="black">   </TD>
+<TD bgcolor="black">   </TD></TR></TABLE>>]
+}
