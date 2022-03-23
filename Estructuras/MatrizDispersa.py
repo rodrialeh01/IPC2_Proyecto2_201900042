@@ -94,3 +94,25 @@ class MatrizDispersa():
         except:
             print('Coordenada no encontrada')
             return None
+
+    def civiles(self, caracter):
+        try:
+            for i in range(1, self.filas.tamanio):
+                tmp : NodoCelda = self.filas.getCabecera(i).indicador
+                while tmp != None:
+                    if tmp.caracter == caracter:
+                        return True
+                    tmp = tmp.derecha
+        except:
+            print('Coordenada no encontrada')
+            return False
+
+    def cantidadrecursos(self):
+        contador = 0
+        for i in range(1, self.filas.tamanio):
+            tmp : NodoCelda = self.filas.getCabecera(i).indicador
+            while tmp != None:
+                if tmp.caracter == 'R':
+                    contador += 1
+                tmp = tmp.derecha
+        return contador

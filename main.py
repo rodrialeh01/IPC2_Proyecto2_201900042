@@ -45,6 +45,7 @@ def ProcesarArchivo(ruta):
                         print('Cantidad de Columnas: ' + str(element[0].attrib.get('columnas')))
                         Lista_Ciudades.InsertarCiudad(element[0].text,int(element[0].attrib.get('filas')),int(element[0].attrib.get('columnas')))
                         contador = 1
+                        c = 1
                         for subelement in element:
                             if subelement.tag == "fila":
                                 print('**************************')
@@ -54,6 +55,9 @@ def ProcesarArchivo(ruta):
                                 contenido = subelement.text.split('"')
                                 for caracter in contenido[1]:
                                     Lista_Ciudades.cola.matriz.InsertarNodo(int(subelement.attrib.get('numero')),contadorc,caracter,0)
+                                    if caracter == 'R':
+                                        Lista_Ciudades.cola.recursos.InsertarNodo(int(c),int(subelement.attrib.get('numero')),int(contadorc))
+                                        c += 1
                                     contadorc+=1
                             elif subelement.tag == "unidadMilitar":
                                 print('--------------------------')
@@ -102,6 +106,7 @@ botoncargar.place(x=1050,y=25)
 label1 = Label(ventana, text='Selecciona una ciudad:', font='CenturyGothic 15', fg='black', bg='#C8881F')
 label1.place(x=40,y=100)
 
+
 #COMBOBOX DE CIUDADES
 cociudades = ttk.Combobox(state='readonly')
 cociudades.place(x=40,y=140)
@@ -128,10 +133,17 @@ def MostrarCiudad():
         Lista_Ciudades.GraficarMatriz(Lista_Ciudades.retornarNodo(cociudades.get()))
         CargarImagen()
         labels()
+        lb()
     elif cociudades.get() == "":
         messagebox.showinfo("Error","No ha seleccionado ninguna opcion")
     else:
         messagebox.showinfo("Error","No existe :(")
+
+def lb():
+    global Lista_Ciudades
+    global cociudades
+    labelmap = Label(ventana, text='Mapa de la ciudad de ' + str(Lista_Ciudades.retornarNodo(cociudades.get()).nombre) + ':', font='CenturyGothic 15', fg='black', bg='#C8881F')
+    labelmap.place(x=350,y=60)
 
 
 def CargarImagen():
@@ -157,15 +169,23 @@ def MostrarTR():
     corobotst['values']= ['ChapinFighter', 'ChapinRescue']
     corobotst.config(font='arial 12')
     bot1()
-
+botonr2 = None
+botonr3 = None
 def tipoR():
     global corobotst
+    global Lista_Ciudades
+    global cociudades
+    global botonr3
+    global botonr2
     if corobotst.get()=="ChapinFighter":
         RobotS(corobotst.get())
         bot2()
     elif corobotst.get()=="ChapinRescue":
-        RobotS(corobotst.get())
-        bot3()
+        if Lista_Ciudades.retornarNodo(cociudades.get()).matriz.civiles('C') == True:
+            RobotS(corobotst.get())
+            bot3()
+        else:
+            messagebox.showinfo("Error","No existen unidades civiles en esta ciudad")
     elif corobotst.get()=="":
         messagebox.showinfo("Error","No ha seleccionado ninguna opcion")
     else:
@@ -201,6 +221,7 @@ def MostrarRobot():
             if prueba == True:
                 print('Holi')
         elif Lista_Robots.RetornarRobot(corobot.get()).tipo == 'ChapinRescue':
+            recursos()
             messagebox.showinfo("Exito","Si existe el Robot")
     elif corobot.get() == "":
         messagebox.showinfo("Error","No ha seleccionado ninguna opcion")
@@ -208,48 +229,70 @@ def MostrarRobot():
         messagebox.showinfo("Error","No existe :(")
 
 def bot2():
-    botonr2 = Button(ventana,text='Realizar Mision de Rescate', font='CenturyGothic 11', bg="white", command=MostrarRobot)
+    botonr2 = Button(ventana,text='Seleccionar', font='CenturyGothic 11', bg="white", command=MostrarRobot)
     botonr2.place(x=40,y=440)
 
+def recursos():
+    global Lista_Ciudades
+    global cociudades
+    label2 = Label(ventana, text='Selecciona un recurso:', font='CenturyGothic 15', fg='black', bg='#C8881F')
+    label2.place(x=40,y=500)
+    coresources = ttk.Combobox(state='readonly')
+    coresources.place(x=40,y=550)
+    contenido = []
+    listar = Lista_Ciudades.retornarNodo(cociudades.get()).recursos
+    actual = listar.cabeza
+    while actual != None:
+        a = 'Recurso ' + str(actual.id) + ' Coordenada(' + str(actual.x) + ',' + str(actual.y) + ')'
+        contenido.append(a)
+        actual = actual.siguiente
+    coresources['values']= contenido
+    coresources.config(font='arial 12')
+    bot4()
+
 def bot3():
-    botonr3 = Button(ventana,text='Realizar Mision de Extraccion de Recursos', font='CenturyGothic 11', bg="white", command=MostrarRobot)
+    botonr3 = Button(ventana,text='Seleccionar', font='CenturyGothic 11', bg="white", command=MostrarRobot)
     botonr3.place(x=40,y=440)
+
+def bot4():
+    botonr4 = Button(ventana,text='Realizar Mision', font='CenturyGothic 11', bg="white", command=MostrarRobot)
+    botonr4.place(x=40,y=600)
 
 def labels():
     lblc0 = Label(ventana, text='***', font='CenturyGothic 10', fg='black', bg='black')
-    lblc0.place(x=40,y=500)
+    lblc0.place(x=400,y=5)
 
     lblc00 = Label(ventana, text='Intransitable', font='CenturyGothic 12 bold', fg='black', bg='#C8881F')
-    lblc00.place(x=70,y=495)
+    lblc00.place(x=420,y=5)
 
     lblc1 = Label(ventana, text='***', font='CenturyGothic 10', fg='#54DA22', bg='#54DA22')
-    lblc1.place(x=40,y=530)
+    lblc1.place(x=600,y=5)
 
     lblc10 = Label(ventana, text='Punto de Entrada', font='CenturyGothic 12 bold', fg='black', bg='#C8881F')
-    lblc10.place(x=70,y=530)
+    lblc10.place(x=620,y=5)
 
     lblc2 = Label(ventana, text='***', font='CenturyGothic 10', fg='white', bg='white')
-    lblc2.place(x=40,y=560)
+    lblc2.place(x=850,y=5)
 
     lblc20 = Label(ventana, text='Camino', font='CenturyGothic 12 bold', fg='black', bg='#C8881F')
-    lblc20.place(x=70,y=560)
+    lblc20.place(x=870,y=5)
 
     lblc3 = Label(ventana, text='***', font='CenturyGothic 10', fg='#9A0219', bg='#9A0219')
-    lblc3.place(x=40,y=590)
+    lblc3.place(x=400,y=30)
 
     lblc30 = Label(ventana, text='Unidad Militar', font='CenturyGothic 12 bold', fg='black', bg='#C8881F')
-    lblc30.place(x=70,y=590)
+    lblc30.place(x=420,y=30)
 
     lblc4 = Label(ventana, text='***', font='CenturyGothic 10', fg='#326CD8', bg='#326CD8')
-    lblc4.place(x=40,y=620)
+    lblc4.place(x=600,y=30)
 
     lblc40 = Label(ventana, text='Unidad Civil', font='CenturyGothic 12 bold', fg='black', bg='#C8881F')
-    lblc40.place(x=70,y=620)
+    lblc40.place(x=620,y=30)
 
     lblc5 = Label(ventana, text='***', font='CenturyGothic 10', fg='#9699A0', bg='#9699A0')
-    lblc5.place(x=40,y=650)
+    lblc5.place(x=850,y=30)
 
     lblc40 = Label(ventana, text='Recurso', font='CenturyGothic 12 bold', fg='black', bg='#C8881F')
-    lblc40.place(x=70,y=650)
+    lblc40.place(x=870,y=30)
 
 ventana.mainloop()
