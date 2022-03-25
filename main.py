@@ -18,6 +18,7 @@ from Estructuras.ListaCiudades import ListaCiudades
 from Estructuras.ListaRobots import ListaRobots
 from Estructuras.MatrizDispersa import MatrizDispersa
 from Estructuras.ListaRecursos import ListaRecursos
+from Estructuras.ListaUCiviles import ListaUCiviles
 
 #VARIABLES GLOBALES DE LAS LISTAS
 Lista_Ciudades = ListaCiudades()
@@ -55,6 +56,7 @@ def ProcesarArchivo(ruta):
                             Lista_Ciudades.InsertarCiudad(element[0].text,int(element[0].attrib.get('filas')),int(element[0].attrib.get('columnas')))
                             contador = 1
                             c = 1
+                            cc = 1
                             for subelement in element:
                                 if subelement.tag == "fila":
                                     contadorc = 1
@@ -64,6 +66,9 @@ def ProcesarArchivo(ruta):
                                         if caracter == 'R':
                                             Lista_Ciudades.cola.recursos.InsertarNodo(int(c),int(subelement.attrib.get('numero')),int(contadorc))
                                             c += 1
+                                        elif caracter == 'C':
+                                            Lista_Ciudades.cola.civiles.InsertarNodo(int(cc),int(subelement.attrib.get('numero')),int(contadorc))
+                                            cc +=1
                                         contadorc+=1
                                 elif subelement.tag == "unidadMilitar":
                                     capacidad = int(subelement.text)
@@ -77,8 +82,11 @@ def ProcesarArchivo(ruta):
                             nodo.matriz = MatrizDispersa()
                             nodo.recursos = None
                             nodo.recursos = ListaRecursos()
+                            nodo.civiles = None
+                            nodo.civiles = ListaUCiviles()
                             contador = 1
                             c = 1
+                            cc = 1
                             for subelement in element:
                                 if subelement.tag == "fila":
                                     contadorc = 1
@@ -88,6 +96,9 @@ def ProcesarArchivo(ruta):
                                         if caracter == 'R':
                                             nodo.recursos.InsertarNodo(int(c),int(subelement.attrib.get('numero')),int(contadorc))
                                             c += 1
+                                        elif caracter == 'C':
+                                            nodo.civiles.InsertarNodo(int(cc),int(subelement.attrib.get('numero')),int(contadorc))
+                                            cc += 1
                                         contadorc+=1
                                 elif subelement.tag == "unidadMilitar":
                                     capacidad = int(subelement.text)
@@ -222,6 +233,13 @@ coresources = ttk.Combobox(state='readonly')
 #BOTON PARA REALIZAR LA MISION DE RECURSOS
 botonr4 = Button(ventana,text='Realizar Mision', font='CenturyGothic 11', bg="white")
 
+#LABEL DE SELECCIONAR UNA UNIDAD CIVIL
+lc = Label(text='Selecciona una Unidad Civil:', font='CenturyGothic 15', fg='black', bg='#C8881F')
+#COMBOBOX DE LOS RECURSOS
+cocivil = ttk.Combobox(state='readonly')
+#BOTON PARA REALIZAR LA MISION DE RECURSOS
+botonciv = Button(ventana,text='Realizar Mision', font='CenturyGothic 11', bg="white")
+
 #METODO PARA MOSTRAR LAS OPCIONES DE ROBOT DISPONIBLES Y REALIZAR LAS OPERACIONES CORRESPONDIENTES
 def tipoR():
     global corobotst
@@ -232,16 +250,22 @@ def tipoR():
     global botonr3
     global botonr2
     global botonr4
+    global lc
+    global cocivil
+    global botonciv
     if corobotst.get()=="ChapinFighter":
         RobotS(corobotst.get())
         bot2()
-        l2.place_forget()
-        coresources.place_forget()
-        botonr4.place_forget
+        lc.place_forget()
+        cocivil.place_forget()
+        botonciv.place_forget()   
     elif corobotst.get()=="ChapinRescue":
         if Lista_Ciudades.retornarNodo(cociudades.get()).matriz.civiles('C') == True:
             RobotS(corobotst.get())
             bot3()
+            l2.place_forget()
+            coresources.place_forget()
+            botonr4.place_forget()    
         else:
             messagebox.showinfo("Error","No existen unidades civiles en esta ciudad")
     elif corobotst.get()=="":
@@ -280,12 +304,9 @@ def MostrarRobot():
     global Lista_Robots
     if Lista_Robots.RetornarRobot(corobot.get()) != None:
         if Lista_Robots.RetornarRobot(corobot.get()).tipo == 'ChapinFighter':
-            prueba = messagebox.askyesno(title="Robot de Combate", message="El robot seleccionado contiene la capacidad de "+str(Lista_Robots.RetornarRobot(corobot.get()).capacidad) + " unidades\n Desea continuar con la mision?")
-            if prueba == True:
-                print('Holi')
-        elif Lista_Robots.RetornarRobot(corobot.get()).tipo == 'ChapinRescue':
             recursos()
-            messagebox.showinfo("Exito","Si existe el Robot")
+        elif Lista_Robots.RetornarRobot(corobot.get()).tipo == 'ChapinRescue':
+            civiles()
     elif corobot.get() == "":
         messagebox.showinfo("Error","No ha seleccionado ninguna opcion")
     else:
@@ -315,6 +336,25 @@ def recursos():
     coresources.config(font='arial 12')
     bot4()
 
+#METODO PARA MOSTRAR EL COMBOBOX DE UNIDADES CIVILES
+def civiles():
+    global Lista_Ciudades
+    global cociudades
+    global cocivil
+    
+    lc.place(x=40,y=500)
+    cocivil.place(x=40,y=550)
+    contenido = []
+    listac = Lista_Ciudades.retornarNodo(cociudades.get()).civiles
+    actual = listac.cabeza
+    while actual != None:
+        a = 'Unidad Civil ' + str(actual.id) + ' Coordenada(' + str(actual.x) + ',' + str(actual.y) + ')'
+        contenido.append(a)
+        actual = actual.siguiente
+    cocivil['values']= contenido
+    cocivil.config(font='arial 12')
+    bot5()
+
 #METODO PARA MOSTRAR EL BOTON DE SELECCIONAR EL RECURSO
 def bot3():
     botonr3 = Button(ventana,text='Seleccionar', font='CenturyGothic 11', bg="white", command=MostrarRobot)
@@ -324,12 +364,20 @@ def bot3():
 def ObtenerRecurso():
     global coresources
     print('Indice: ' + str(coresources.current()))
+    prueba = messagebox.askyesno(title="Robot de Combate", message="El robot seleccionado contiene la capacidad de "+str(Lista_Robots.RetornarRobot(corobot.get()).capacidad) + " unidades\n Desea continuar con la mision?")
+    if prueba == True:
+        print('Holi')
 
 #METODO PARA UBICAR EL BOTON
 def bot4():
     global botonr4
     botonr4.place(x=40,y=600)
     botonr4['command'] = ObtenerRecurso
+
+def bot5():
+    global botonciv
+    botonciv.place(x=40,y=600)
+    #botonciv['command'] = ObtenerRecurso
 
 #----------------------------------METODO PARA MOSTRAR LA INFO DEL MAPA EN LA VENTANA---------------------------
 def labels():
