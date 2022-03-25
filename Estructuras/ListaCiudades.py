@@ -82,3 +82,5 @@ class ListaCiudades:
         #os.startfile('Matriz_' + nodo.nombre + '.png')
         print('Grafica del patron inicial generada con exito')
 
+    def __len__(self):
+        return self.tamanio

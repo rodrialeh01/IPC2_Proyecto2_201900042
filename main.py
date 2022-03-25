@@ -301,12 +301,28 @@ def agregarR(tipo):
 #METODO PARA OPERACIONES CON EL ROBOT SELECCIONADO
 def MostrarRobot():
     global corobot
+    global cociudades
     global Lista_Robots
+    global Lista_Ciudades
     if Lista_Robots.RetornarRobot(corobot.get()) != None:
         if Lista_Robots.RetornarRobot(corobot.get()).tipo == 'ChapinFighter':
-            recursos()
+            if len(Lista_Ciudades.retornarNodo(cociudades.get()).recursos) == 0:
+                messagebox.showinfo("Error","No hay recursos en esta ciudad")
+            elif len(Lista_Ciudades.retornarNodo(cociudades.get()).recursos) == 1:
+                mre = messagebox.askyesno("Success","Solo existe el recurso con ID: " + str(Lista_Ciudades.retornarNodo(cociudades.get()).recursos.cabeza.id))
+                if mre == True:
+                    print('OLI')
+            elif len(Lista_Ciudades.retornarNodo(cociudades.get()).recursos) > 1:
+                recursos()
         elif Lista_Robots.RetornarRobot(corobot.get()).tipo == 'ChapinRescue':
-            civiles()
+            if len(Lista_Ciudades.retornarNodo(cociudades.get()).civiles) == 0:
+                messagebox.showinfo("Error","No hay Unidades Civiles en esta ciudad")
+            elif len(Lista_Ciudades.retornarNodo(cociudades.get()).civiles) == 1:
+                mciv = messagebox.askyesno("Success","Solo existe la unidad civil con ID: " + str(Lista_Ciudades.retornarNodo(cociudades.get()).civiles.cabeza.id))
+                if mciv == True:
+                    print('OLIS')
+            elif len(Lista_Ciudades.retornarNodo(cociudades.get()).civiles) > 1:
+                civiles()
     elif corobot.get() == "":
         messagebox.showinfo("Error","No ha seleccionado ninguna opcion")
     else:

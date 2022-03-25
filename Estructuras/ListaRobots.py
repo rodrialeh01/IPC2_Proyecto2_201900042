@@ -43,3 +43,6 @@ class ListaRobots:
                 return True
             actual = actual.siguiente
         return False
+
+    def __len__(self):
+        return self.tamanio

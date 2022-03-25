@@ -27,3 +27,6 @@ class ListaRecursos:
             if actual.id == id:
                 return actual
             actual = actual.siguiente
+
+    def __len__(self):
+        return self.tamanio
