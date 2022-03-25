@@ -30,6 +30,14 @@ class ListaCiudades:
                 return actual
             actual = actual.siguiente
 
+    def verificarNombre(self, nombre):
+        actual = self.cabeza
+        while actual != None:
+            if nombre == actual.nombre:
+                return True
+            actual = actual.siguiente
+        return False
+
     def GraficarMatriz(self, nodo):
         contenido = ''
         file = open('MapasGenerados/Matriz_' + str(nodo.nombre) + '.dot', 'w')

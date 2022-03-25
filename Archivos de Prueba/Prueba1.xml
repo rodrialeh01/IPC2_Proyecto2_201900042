@@ -27,7 +27,7 @@
             <unidadMilitar fila="14" columna="10">35</unidadMilitar>
         </ciudad>
         <ciudad>
-            <nombre filas="20" columnas="16">Ciudad2</nombre>
+            <nombre filas="20" columnas="16">CentralCity</nombre>
             <fila numero="1">"****************"</fila>
             <fila numero="2">"* **************"</fila>
             <fila numero="3">"*         ****R*"</fila>

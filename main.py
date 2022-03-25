@@ -1,3 +1,4 @@
+from re import L
 import tkinter as tk
 from tkinter import Button
 from tkinter import ttk
@@ -9,9 +10,12 @@ from PIL import ImageTk, Image
 from xml.etree import ElementTree as et
 from Estructuras.ListaCiudades import ListaCiudades
 from Estructuras.ListaRobots import ListaRobots
+from Estructuras.MatrizDispersa import MatrizDispersa
+from Estructuras.ListaRecursos import ListaRecursos
 
 Lista_Ciudades = ListaCiudades()
 Lista_Robots = ListaRobots()
+
 
 #VENTANA
 ventana = tk.Tk()
@@ -40,48 +44,61 @@ def ProcesarArchivo(ruta):
             for i in range(len(root)):
                 if root[i].tag == "listaCiudades":
                     for element in root[i]:
-                        print('Nombre: ' + str(element[0].text))
-                        print('Cantidad de Filas: ' + str(element[0].attrib.get('filas')))
-                        print('Cantidad de Columnas: ' + str(element[0].attrib.get('columnas')))
-                        Lista_Ciudades.InsertarCiudad(element[0].text,int(element[0].attrib.get('filas')),int(element[0].attrib.get('columnas')))
-                        contador = 1
-                        c = 1
-                        for subelement in element:
-                            if subelement.tag == "fila":
-                                print('**************************')
-                                print('Fila No.' + subelement.attrib.get('numero'))
-                                print('Contenido: ' + str(subelement.text))
-                                contadorc = 1
-                                contenido = subelement.text.split('"')
-                                for caracter in contenido[1]:
-                                    Lista_Ciudades.cola.matriz.InsertarNodo(int(subelement.attrib.get('numero')),contadorc,caracter,0)
-                                    if caracter == 'R':
-                                        Lista_Ciudades.cola.recursos.InsertarNodo(int(c),int(subelement.attrib.get('numero')),int(contadorc))
-                                        c += 1
-                                    contadorc+=1
-                            elif subelement.tag == "unidadMilitar":
-                                print('--------------------------')
-                                print('Unidad Militar No.'  + str(contador))
-                                print('Fila No.' + str(subelement.attrib.get('fila')))
-                                print('Columna No. ' + str(subelement.attrib.get('columna')))
-                                print('Capacidad: ' + str(subelement.text))
-                                capacidad = int(subelement.text)
-                                Lista_Ciudades.cola.matriz.InsertarNodo(int(subelement.attrib.get('fila')),int(subelement.attrib.get('columna')),'M',capacidad)
-                                contador += 1
-
+                        if Lista_Ciudades.verificarNombre(str(element[0].text)) == False:
+                            Lista_Ciudades.InsertarCiudad(element[0].text,int(element[0].attrib.get('filas')),int(element[0].attrib.get('columnas')))
+                            contador = 1
+                            c = 1
+                            for subelement in element:
+                                if subelement.tag == "fila":
+                                    contadorc = 1
+                                    contenido = subelement.text.split('"')
+                                    for caracter in contenido[1]:
+                                        Lista_Ciudades.cola.matriz.InsertarNodo(int(subelement.attrib.get('numero')),contadorc,caracter,0)
+                                        if caracter == 'R':
+                                            Lista_Ciudades.cola.recursos.InsertarNodo(int(c),int(subelement.attrib.get('numero')),int(contadorc))
+                                            c += 1
+                                        contadorc+=1
+                                elif subelement.tag == "unidadMilitar":
+                                    capacidad = int(subelement.text)
+                                    Lista_Ciudades.cola.matriz.InsertarNodo(int(subelement.attrib.get('fila')),int(subelement.attrib.get('columna')),'M',capacidad)
+                                    contador += 1
+                        else:
+                            nodo = Lista_Ciudades.retornarNodo(str(element[0].text))
+                            nodo.filas = int(element[0].attrib.get('filas'))
+                            nodo.columnas = int(element[0].attrib.get('columnas'))
+                            nodo.matriz = None
+                            nodo.matriz = MatrizDispersa()
+                            nodo.recursos = None
+                            nodo.recursos = ListaRecursos()
+                            contador = 1
+                            c = 1
+                            for subelement in element:
+                                if subelement.tag == "fila":
+                                    contadorc = 1
+                                    contenido = subelement.text.split('"')
+                                    for caracter in contenido[1]:
+                                        nodo.matriz.InsertarNodo(int(subelement.attrib.get('numero')),contadorc,caracter,0)
+                                        if caracter == 'R':
+                                            nodo.recursos.InsertarNodo(int(c),int(subelement.attrib.get('numero')),int(contadorc))
+                                            c += 1
+                                        contadorc+=1
+                                elif subelement.tag == "unidadMilitar":
+                                    capacidad = int(subelement.text)
+                                    Lista_Ciudades.cola.matriz.InsertarNodo(int(subelement.attrib.get('fila')),int(subelement.attrib.get('columna')),'M',capacidad)
+                                    contador += 1
                 elif root[i].tag == "robots":
-                    print('----------------------------------------------')
                     for element in root[i]:
                         for subelement in element:
-                            print('$$$$$$$$$$$$$$$$$$$$$$$$$$$$')
-                            print('Nombre: ' + str(subelement.text))
-                            print('Tipo: ' + str(subelement.attrib.get('tipo')))
                             if subelement.attrib.get('tipo') == "ChapinFighter":
-                                print('Capacidad: '+str(subelement.attrib.get('capacidad')))
                                 cap = int(subelement.attrib.get('capacidad'))
-                                Lista_Robots.agregarNodo(str(subelement.attrib.get('tipo')),str(subelement.text),cap)
+                                if Lista_Robots.verificarNombre(subelement.text) == False:
+                                    Lista_Robots.agregarNodo(str(subelement.attrib.get('tipo')),str(subelement.text),cap)
+                                else:
+                                    Lista_Robots.RetornarRobot(subelement.text).capacidad = cap 
                             elif subelement.attrib.get('tipo') == "ChapinRescue":
-                                Lista_Robots.agregarNodo(str(subelement.attrib.get('tipo')),str(subelement.text),0)
+                                if Lista_Robots.verificarNombre(subelement.text) == False:
+                                    Lista_Robots.agregarNodo(str(subelement.attrib.get('tipo')),str(subelement.text),0)
+
 
 #ABRE UNA VENTANA PARA ELEGIR EL ARCHIVO
 def Ruta():
@@ -171,15 +188,24 @@ def MostrarTR():
     bot1()
 botonr2 = None
 botonr3 = None
+l2 = Label(text='Selecciona un recurso:', font='CenturyGothic 15', fg='black', bg='#C8881F')
+coresources = ttk.Combobox(state='readonly')
+botonr4 = Button(ventana,text='Realizar Mision', font='CenturyGothic 11', bg="white")
 def tipoR():
     global corobotst
     global Lista_Ciudades
     global cociudades
+    global l2
+    global coresources
     global botonr3
     global botonr2
+    global botonr4
     if corobotst.get()=="ChapinFighter":
         RobotS(corobotst.get())
         bot2()
+        l2.place_forget()
+        coresources.place_forget()
+        botonr4.place_forget()
     elif corobotst.get()=="ChapinRescue":
         if Lista_Ciudades.retornarNodo(cociudades.get()).matriz.civiles('C') == True:
             RobotS(corobotst.get())
@@ -235,9 +261,9 @@ def bot2():
 def recursos():
     global Lista_Ciudades
     global cociudades
-    label2 = Label(ventana, text='Selecciona un recurso:', font='CenturyGothic 15', fg='black', bg='#C8881F')
-    label2.place(x=40,y=500)
-    coresources = ttk.Combobox(state='readonly')
+    global corobot
+    
+    l2.place(x=40,y=500)
     coresources.place(x=40,y=550)
     contenido = []
     listar = Lista_Ciudades.retornarNodo(cociudades.get()).recursos
@@ -250,12 +276,13 @@ def recursos():
     coresources.config(font='arial 12')
     bot4()
 
+
 def bot3():
     botonr3 = Button(ventana,text='Seleccionar', font='CenturyGothic 11', bg="white", command=MostrarRobot)
     botonr3.place(x=40,y=440)
 
 def bot4():
-    botonr4 = Button(ventana,text='Realizar Mision', font='CenturyGothic 11', bg="white", command=MostrarRobot)
+    global botonr4
     botonr4.place(x=40,y=600)
 
 def labels():
