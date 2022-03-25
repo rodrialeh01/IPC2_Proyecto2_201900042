@@ -1,18 +1,25 @@
-from re import L
+#IMPORTANDO LIBRERIAS
+#-------------TKINTER-------------
 import tkinter as tk
 from tkinter import Button
 from tkinter import ttk
 from tkinter import *
 from tkinter import filedialog
 from tkinter import messagebox
+#-------------PILLOW--------------
 from PIL import ImageTk, Image
-
+#---------------OS----------------
+import os
+#-----------ELEMENT-TREE----------
 from xml.etree import ElementTree as et
+
+#IMPORTANDO CLASES
 from Estructuras.ListaCiudades import ListaCiudades
 from Estructuras.ListaRobots import ListaRobots
 from Estructuras.MatrizDispersa import MatrizDispersa
 from Estructuras.ListaRecursos import ListaRecursos
 
+#VARIABLES GLOBALES DE LAS LISTAS
 Lista_Ciudades = ListaCiudades()
 Lista_Robots = ListaRobots()
 
@@ -34,7 +41,7 @@ imagen = ImageTk.PhotoImage(Image.open('icono.ico').resize((60,60)))
 ilabel = Label(image=imagen, bg='#C8881F')
 ilabel.place(x=50, y=10)
 
-#-------------------------------------------------------------------------
+#METODO PARA LEER UN ARCHIVO XML
 def ProcesarArchivo(ruta):
     global Lista_Ciudades
     global Lista_Robots
@@ -105,6 +112,7 @@ def Ruta():
     ruta = filedialog.askopenfilename(title='Cargar Archivo', filetypes = (("Text files", "*.xml*"), ("all files", "*.*")))
     return ruta
 
+#FUNCION PARA PODER CARGAR UN ARCHIVO Y REALIZAR LAS OPERACIONES CORRESPONDIENTES
 def CargarArchivo():
     ruta = Ruta()
     try:
@@ -117,17 +125,19 @@ def CargarArchivo():
     except:
         messagebox.showinfo("Error","Hubo un error al procesar el archivo")
 
+#BOTON DE CARGAR ARCHIVO
 botoncargar = Button(ventana,text='Cargar Archivo', font='arial 15', bg="white", command=CargarArchivo)
 botoncargar.place(x=1050,y=25)
 
+#LABEL DE SELECCIONAR UNA CIUDAD
 label1 = Label(ventana, text='Selecciona una ciudad:', font='CenturyGothic 15', fg='black', bg='#C8881F')
 label1.place(x=40,y=100)
-
 
 #COMBOBOX DE CIUDADES
 cociudades = ttk.Combobox(state='readonly')
 cociudades.place(x=40,y=140)
 
+#METODO PARA AGREGAR NOMBRES DE CIUDADES AL COMBOBOX
 def agregar():
     global Lista_Ciudades
     mostrar = []
@@ -141,28 +151,42 @@ def agregar():
 namemat = ''
 imgCargar = None
 imlabel = None
+
+#METODO PARA ABRIR LA IMAGEN CREADA DEL MAPA
+def AbrirImagen():
+    global cociudades
+    os.startfile('MapasGenerados\Matriz_'+cociudades.get()+'.png')
+
+#BOTON PARA ABRIR LA IMAGEN
+botveri = Button(ventana,text='Abrir Imagen',state= DISABLED, font='CenturyGothic 11', bg="white", command=AbrirImagen)
+botveri.place(x=170,y=190)
+
+#METODO PARA MOSTRAR EL MAPA DE LA CIUDAD EN LA VENTANA Y REALIZAR SIGUIENTES OPERACIONES
 def MostrarCiudad():
     global Lista_Ciudades
     global cociudades
+    global botveri
     if Lista_Ciudades.retornarNodo(cociudades.get()) != None:
-        messagebox.showinfo("Exito","Si existe la Ciudad y tiene" + str(Lista_Ciudades.retornarNodo(cociudades.get()).filas) + ' filas y '+ str(Lista_Ciudades.retornarNodo(cociudades.get()).columnas) + ' columnas')
+        #messagebox.showinfo("Exito","Si existe la Ciudad y tiene" + str(Lista_Ciudades.retornarNodo(cociudades.get()).filas) + ' filas y '+ str(Lista_Ciudades.retornarNodo(cociudades.get()).columnas) + ' columnas')
         MostrarTR()
         Lista_Ciudades.GraficarMatriz(Lista_Ciudades.retornarNodo(cociudades.get()))
         CargarImagen()
         labels()
         lb()
+        botveri['state'] = NORMAL
     elif cociudades.get() == "":
         messagebox.showinfo("Error","No ha seleccionado ninguna opcion")
     else:
         messagebox.showinfo("Error","No existe :(")
 
+#METODO PARA MOSTRAR EL LABEL DE MAPA DE LA CIUDAD
 def lb():
     global Lista_Ciudades
     global cociudades
-    labelmap = Label(ventana, text='Mapa de la ciudad de ' + str(Lista_Ciudades.retornarNodo(cociudades.get()).nombre) + ':', font='CenturyGothic 15', fg='black', bg='#C8881F')
+    labelmap = Label(ventana, text='Mapa de la ciudad:', font='CenturyGothic 15', fg='black', bg='#C8881F')
     labelmap.place(x=350,y=60)
 
-
+#METODO PARA MOSTRAR EL MAPA EN LA VENTANA
 def CargarImagen():
     global imgCargar
     global imlabel
@@ -170,6 +194,7 @@ def CargarImagen():
     imlabel = Label(image=imgCargar)
     imlabel.place(x=350, y=100)
 
+#BOTON DE MOSTRAR CIUDAD
 botonverc = Button(ventana,text='Mostrar Ciudad', font='CenturyGothic 11', bg="white", command=MostrarCiudad)
 botonverc.place(x=40,y=190)
 
@@ -186,11 +211,18 @@ def MostrarTR():
     corobotst['values']= ['ChapinFighter', 'ChapinRescue']
     corobotst.config(font='arial 12')
     bot1()
+
 botonr2 = None
 botonr3 = None
+
+#LABEL DE SELECCIONAR UN RECURSO
 l2 = Label(text='Selecciona un recurso:', font='CenturyGothic 15', fg='black', bg='#C8881F')
+#COMBOBOX DE LOS RECURSOS
 coresources = ttk.Combobox(state='readonly')
+#BOTON PARA REALIZAR LA MISION DE RECURSOS
 botonr4 = Button(ventana,text='Realizar Mision', font='CenturyGothic 11', bg="white")
+
+#METODO PARA MOSTRAR LAS OPCIONES DE ROBOT DISPONIBLES Y REALIZAR LAS OPERACIONES CORRESPONDIENTES
 def tipoR():
     global corobotst
     global Lista_Ciudades
@@ -205,7 +237,7 @@ def tipoR():
         bot2()
         l2.place_forget()
         coresources.place_forget()
-        botonr4.place_forget()
+        botonr4.place_forget
     elif corobotst.get()=="ChapinRescue":
         if Lista_Ciudades.retornarNodo(cociudades.get()).matriz.civiles('C') == True:
             RobotS(corobotst.get())
@@ -217,11 +249,14 @@ def tipoR():
     else:
         messagebox.showinfo("Error","Seleccione una opcion correcta")
 
+#METODO PARA EL BOTON DE ELEGIR EL TIPO DE ROBOT
 def bot1():
     botonr1 = Button(ventana,text='Elegir Tipo', font='CenturyGothic 11', bg="white", command=tipoR)
     botonr1.place(x=40,y=320)
 
 corobot = None
+
+#METODO PARA MOSTRAR LOS LABEL Y EL COMBOBOX DE SELECCIONAR UN ROBOT
 def RobotS(tipo):
     global corobot
     label2 = Label(ventana, text='Selecciona un Robot:', font='CenturyGothic 15', fg='black', bg='#C8881F')
@@ -231,6 +266,7 @@ def RobotS(tipo):
     corobot.place(x=40,y=400)
     agregarR(tipo)
 
+#METODO PARA AGREGAR ROBOTS AL COMBOBOX
 def agregarR(tipo):
     global Lista_Robots
     global corobot
@@ -238,6 +274,7 @@ def agregarR(tipo):
     corobot['values']= Lista_Robots.RetornarRobots(tipo)
     corobot.config(font='arial 12')
 
+#METODO PARA OPERACIONES CON EL ROBOT SELECCIONADO
 def MostrarRobot():
     global corobot
     global Lista_Robots
@@ -254,10 +291,12 @@ def MostrarRobot():
     else:
         messagebox.showinfo("Error","No existe :(")
 
+#METODO PARA MOSTRAR EL BOTON DE SELECCIONAR EL ROBOT
 def bot2():
     botonr2 = Button(ventana,text='Seleccionar', font='CenturyGothic 11', bg="white", command=MostrarRobot)
     botonr2.place(x=40,y=440)
 
+#METODO PARA MOSTRAR EL COMBOBOX DE RECURSOS
 def recursos():
     global Lista_Ciudades
     global cociudades
@@ -276,15 +315,23 @@ def recursos():
     coresources.config(font='arial 12')
     bot4()
 
-
+#METODO PARA MOSTRAR EL BOTON DE SELECCIONAR EL RECURSO
 def bot3():
     botonr3 = Button(ventana,text='Seleccionar', font='CenturyGothic 11', bg="white", command=MostrarRobot)
     botonr3.place(x=40,y=440)
 
+#METODO PARA OBTENER EL INDICE DEL COMBOBOX
+def ObtenerRecurso():
+    global coresources
+    print('Indice: ' + str(coresources.current()))
+
+#METODO PARA UBICAR EL BOTON
 def bot4():
     global botonr4
     botonr4.place(x=40,y=600)
+    botonr4['command'] = ObtenerRecurso
 
+#----------------------------------METODO PARA MOSTRAR LA INFO DEL MAPA EN LA VENTANA---------------------------
 def labels():
     lblc0 = Label(ventana, text='***', font='CenturyGothic 10', fg='black', bg='black')
     lblc0.place(x=400,y=5)
