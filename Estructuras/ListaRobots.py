@@ -44,5 +44,14 @@ class ListaRobots:
             actual = actual.siguiente
         return False
 
+    def CantidadporTipo(self, tipo):
+        contador = 0
+        actual = self.cabeza
+        while actual != None:
+            if actual.tipo == tipo:
+                contador += 1
+            actual = actual.siguiente
+        return contador
+
     def __len__(self):
         return self.tamanio

@@ -214,12 +214,12 @@ corobotst = None
 #COMBOBOX DE TIPOS DE ROBOTS
 def MostrarTR():
     global corobotst
-    label3 = Label(ventana, text='Selecciona un tipo de robot:', font='CenturyGothic 15', fg='black', bg='#C8881F')
+    label3 = Label(ventana, text='Selecciona una mision:', font='CenturyGothic 15', fg='black', bg='#C8881F')
     label3.place(x=40,y=240)
 
     corobotst = ttk.Combobox(state='readonly')
     corobotst.place(x=40,y=280)
-    corobotst['values']= ['ChapinFighter', 'ChapinRescue']
+    corobotst['values']= ['Mision de Extraccion de Recursos(ChapinFighter)', 'Mision de Rescate(ChapinRescue)']
     corobotst.config(font='arial 12')
     bot1()
 
@@ -244,6 +244,7 @@ botonciv = Button(ventana,text='Realizar Mision', font='CenturyGothic 11', bg="w
 def tipoR():
     global corobotst
     global Lista_Ciudades
+    global Lista_Robots
     global cociudades
     global l2
     global coresources
@@ -253,16 +254,43 @@ def tipoR():
     global lc
     global cocivil
     global botonciv
-    if corobotst.get()=="ChapinFighter":
-        RobotS(corobotst.get())
-        bot2()
-        lc.place_forget()
-        cocivil.place_forget()
-        botonciv.place_forget()   
-    elif corobotst.get()=="ChapinRescue":
-        if Lista_Ciudades.retornarNodo(cociudades.get()).matriz.civiles('C') == True:
-            RobotS(corobotst.get())
-            bot3()
+    if corobotst.get()=="Mision de Extraccion de Recursos(ChapinFighter)":
+        if len(Lista_Ciudades.retornarNodo(cociudades.get()).recursos) >0:
+            if Lista_Robots.CantidadporTipo('ChapinFighter') == 0:
+                messagebox.showinfo("Error","No se puede realizar misiones de extracción de recursos porque no cuenta con robots de tipo: ChapinFighter.")
+            elif Lista_Robots.CantidadporTipo('ChapinFighter') == 1:
+                if len(Lista_Ciudades.retornarNodo(cociudades.get()).recursos) == 0:
+                    messagebox.showinfo("Error","No se puede realizar misiones de extracción de recursos porque esta ciudad no cuenta con recursos.")
+                elif len(Lista_Ciudades.retornarNodo(cociudades.get()).recursos) == 1:
+                    mre = messagebox.askyesno("Success","Solo existe el recurso con ID: " + str(Lista_Ciudades.retornarNodo(cociudades.get()).recursos.cabeza.id))
+                    if mre == True:
+                        print('OLI')
+                elif len(Lista_Ciudades.retornarNodo(cociudades.get()).recursos) > 1:
+                    recursos()
+            else:
+                RobotS('ChapinFighter')
+                bot2()
+            lc.place_forget()
+            cocivil.place_forget()
+            botonciv.place_forget()  
+        else:
+            messagebox.showinfo("Error","No existen recursos en esta ciudad")
+    elif corobotst.get()=="Mision de Rescate(ChapinRescue)":
+        if len(Lista_Ciudades.retornarNodo(cociudades.get()).civiles) > 0:
+            if Lista_Robots.CantidadporTipo('ChapinRescue') == 0:
+                messagebox.showinfo("Error","No se puede realizar misiones de extracción de recursos porque no cuenta con robots de tipo: ChapinRescue.")
+            elif Lista_Robots.CantidadporTipo('ChapinRescue') == 1:
+                if len(Lista_Ciudades.retornarNodo(cociudades.get()).civiles) == 0:
+                    messagebox.showinfo("Error","No se puede realizar misiones de rescate porque esta ciudad no cuenta con Unidades Civiles")
+                elif len(Lista_Ciudades.retornarNodo(cociudades.get()).civiles) == 1:
+                    mciv = messagebox.askyesno("Success","Solo existe la unidad civil con ID: " + str(Lista_Ciudades.retornarNodo(cociudades.get()).civiles.cabeza.id))
+                    if mciv == True:
+                        print('OLIS')
+                elif len(Lista_Ciudades.retornarNodo(cociudades.get()).civiles) > 1:
+                    civiles()
+            else:
+                RobotS('ChapinRescue')
+                bot3()
             l2.place_forget()
             coresources.place_forget()
             botonr4.place_forget()    
@@ -379,10 +407,16 @@ def bot3():
 #METODO PARA OBTENER EL INDICE DEL COMBOBOX
 def ObtenerRecurso():
     global coresources
-    print('Indice: ' + str(coresources.current()))
-    prueba = messagebox.askyesno(title="Robot de Combate", message="El robot seleccionado contiene la capacidad de "+str(Lista_Robots.RetornarRobot(corobot.get()).capacidad) + " unidades\n Desea continuar con la mision?")
-    if prueba == True:
-        print('Holi')
+    global Lista_Robots
+    if Lista_Robots.CantidadporTipo('ChapinFighter') > 1:
+        print('Indice: ' + str(coresources.current()))
+        prueba = messagebox.askyesno(title="Robot de Combate", message="Mision de Extracción de Recursos\nDatos del Robot:\n     Nombre: "+str(Lista_Robots.RetornarRobot(corobot.get()).nombre) +"\n     Capacidad: "+str(Lista_Robots.RetornarRobot(corobot.get()).capacidad) +" unidades.\n¿Desea aceptar enviar a este robot a la mision de extracción de Recursos?")
+        if prueba == True:
+            print('Holi')
+    else:
+        prueba = messagebox.askyesno(title="Robot de Combate", message="Mision de Extracción de Recursos\nDatos del Robot:\n     Nombre: "+str(Lista_Robots.cabeza.nombre) +"\n     Capacidad: "+str(Lista_Robots.cabeza.capacidad) +"unidades.\n¿Desea aceptar enviar a este robot a la mision de extracción de Recursos?")
+        if prueba == True:
+            print('Holi')
 
 #METODO PARA UBICAR EL BOTON
 def bot4():
