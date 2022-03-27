@@ -85,11 +85,15 @@
     <robots>
         <robot>
             <nombre tipo="ChapinFighter" capacidad="150">Peleador1</nombre>
-            <nombre tipo="ChapinRescue">Rescatador1</nombre>
-            <nombre tipo="ChapinFighter" capacidad="50">Peleador2</nombre>
-            <nombre tipo="ChapinFighter" capacidad="70">Peleador3</nombre>
-            <nombre tipo="ChapinRescue">Rescatador2</nombre>
-            <nombre tipo="ChapinRescue">Rescatador3</nombre>
         </robot>
+        <robot>
+            <nombre tipo="ChapinRescue">Rescatador1</nombre>
+        </robot>
+        <robot>
+            <nombre tipo="ChapinRescue">Rescatador2</nombre>
+        </robot>
+        <robot>
+            <nombre tipo="ChapinRescue">Rescatador3</nombre>
+        </robot>   
     </robots>
 </configuracion>

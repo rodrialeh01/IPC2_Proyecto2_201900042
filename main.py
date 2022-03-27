@@ -366,7 +366,7 @@ def recursos():
     global Lista_Ciudades
     global cociudades
     global corobot
-    
+    global coresources
     l2.place(x=40,y=500)
     coresources.place(x=40,y=550)
     contenido = []
@@ -407,14 +407,15 @@ def bot3():
 #METODO PARA OBTENER EL INDICE DEL COMBOBOX
 def ObtenerRecurso():
     global coresources
+    global Lista_Ciudades
     global Lista_Robots
     if Lista_Robots.CantidadporTipo('ChapinFighter') > 1:
         print('Indice: ' + str(coresources.current()))
-        prueba = messagebox.askyesno(title="Robot de Combate", message="Mision de Extracción de Recursos\nDatos del Robot:\n     Nombre: "+str(Lista_Robots.RetornarRobot(corobot.get()).nombre) +"\n     Capacidad: "+str(Lista_Robots.RetornarRobot(corobot.get()).capacidad) +" unidades.\n¿Desea aceptar enviar a este robot a la mision de extracción de Recursos?")
+        prueba = messagebox.askyesno(title="Robot de Combate", message="Mision de Extracción de Recursos\n\nDatos del Robot:\n     Nombre: "+str(Lista_Robots.RetornarRobot(corobot.get()).nombre) +"\n     Capacidad: "+str(Lista_Robots.RetornarRobot(corobot.get()).capacidad) +" unidades.\n\nDatos del recurso seleccionado:\n     Recurso " + str(int(coresources.current())+1) + "\n     Coordenada en X: " + str(Lista_Ciudades.retornarNodo(cociudades.get()).recursos.retornarNodo(int(coresources.current()) + 1).x) + '\n     Coordenada en Y:' + str(Lista_Ciudades.retornarNodo(cociudades.get()).recursos.retornarNodo(int(coresources.current()) + 1).y) + '\n¿Acepta continuar con la misión?')
         if prueba == True:
             print('Holi')
     else:
-        prueba = messagebox.askyesno(title="Robot de Combate", message="Mision de Extracción de Recursos\nDatos del Robot:\n     Nombre: "+str(Lista_Robots.cabeza.nombre) +"\n     Capacidad: "+str(Lista_Robots.cabeza.capacidad) +"unidades.\n¿Desea aceptar enviar a este robot a la mision de extracción de Recursos?")
+        prueba = messagebox.askyesno(title="Robot de Combate", message="Mision de Extracción de Recursos\n\nDatos del Robot:\n     Nombre: "+str(Lista_Robots.cabeza.nombre) +"\n     Capacidad: "+str(Lista_Robots.cabeza.capacidad) +" unidades.\n\nDatos del recurso seleccionado:\n     Recurso " + str(int(coresources.current())+1) + "\n     Coordenada en X: " + str(Lista_Ciudades.retornarNodo(cociudades.get()).recursos.retornarNodo(int(coresources.current()) + 1).x) + '\n     Coordenada en Y:' + str(Lista_Ciudades.retornarNodo(cociudades.get()).recursos.retornarNodo(int(coresources.current()) + 1).y) + '\n¿Acepta continuar con la misión?')
         if prueba == True:
             print('Holi')
 
