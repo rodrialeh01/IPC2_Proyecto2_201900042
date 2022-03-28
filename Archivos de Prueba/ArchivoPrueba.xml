@@ -90,7 +90,13 @@
             <nombre tipo="ChapinRescue">Rescatador1</nombre>
         </robot>
         <robot>
+            <nombre tipo="ChapinFighter" capacidad="100">Peleador2</nombre>
+        </robot>
+        <robot>
             <nombre tipo="ChapinRescue">Rescatador2</nombre>
+        </robot>
+        <robot>
+            <nombre tipo="ChapinFighter" capacidad="200">Peleador3</nombre>
         </robot>
         <robot>
             <nombre tipo="ChapinRescue">Rescatador3</nombre>

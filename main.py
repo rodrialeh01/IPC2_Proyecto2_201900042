@@ -19,6 +19,7 @@ from Estructuras.ListaRobots import ListaRobots
 from Estructuras.MatrizDispersa import MatrizDispersa
 from Estructuras.ListaRecursos import ListaRecursos
 from Estructuras.ListaUCiviles import ListaUCiviles
+from Estructuras.ListaEntradas import ListaEntradas
 
 #VARIABLES GLOBALES DE LAS LISTAS
 Lista_Ciudades = ListaCiudades()
@@ -57,6 +58,7 @@ def ProcesarArchivo(ruta):
                             contador = 1
                             c = 1
                             cc = 1
+                            ce = 1
                             for subelement in element:
                                 if subelement.tag == "fila":
                                     contadorc = 1
@@ -69,6 +71,9 @@ def ProcesarArchivo(ruta):
                                         elif caracter == 'C':
                                             Lista_Ciudades.cola.civiles.InsertarNodo(int(cc),int(subelement.attrib.get('numero')),int(contadorc))
                                             cc +=1
+                                        elif caracter == 'E':
+                                            Lista_Ciudades.cola.entradas.InsertarNodo(int(ce), int(subelement.attrib.get('numero')), int(contadorc))
+                                            ce += 1
                                         contadorc+=1
                                 elif subelement.tag == "unidadMilitar":
                                     capacidad = int(subelement.text)
@@ -84,9 +89,12 @@ def ProcesarArchivo(ruta):
                             nodo.recursos = ListaRecursos()
                             nodo.civiles = None
                             nodo.civiles = ListaUCiviles()
+                            nodo.entradas = None
+                            nodo.entradas = ListaEntradas()
                             contador = 1
                             c = 1
                             cc = 1
+                            ce = 1
                             for subelement in element:
                                 if subelement.tag == "fila":
                                     contadorc = 1
@@ -99,6 +107,9 @@ def ProcesarArchivo(ruta):
                                         elif caracter == 'C':
                                             nodo.civiles.InsertarNodo(int(cc),int(subelement.attrib.get('numero')),int(contadorc))
                                             cc += 1
+                                        elif caracter == 'E':
+                                            Lista_Ciudades.cola.entradas.InsertarNodo(int(ce), int(subelement.attrib.get('numero')), int(contadorc))
+                                            ce += 1
                                         contadorc+=1
                                 elif subelement.tag == "unidadMilitar":
                                     capacidad = int(subelement.text)
@@ -231,15 +242,16 @@ l2 = Label(text='Selecciona un recurso:', font='CenturyGothic 15', fg='black', b
 #COMBOBOX DE LOS RECURSOS
 coresources = ttk.Combobox(state='readonly')
 #BOTON PARA REALIZAR LA MISION DE RECURSOS
-botonr4 = Button(ventana,text='Realizar Mision', font='CenturyGothic 11', bg="white")
+botonr4 = Button(ventana,text='Seleccionar', font='CenturyGothic 11', bg="white")
 
 #LABEL DE SELECCIONAR UNA UNIDAD CIVIL
 lc = Label(text='Selecciona una Unidad Civil:', font='CenturyGothic 15', fg='black', bg='#C8881F')
 #COMBOBOX DE LOS RECURSOS
 cocivil = ttk.Combobox(state='readonly')
 #BOTON PARA REALIZAR LA MISION DE RECURSOS
-botonciv = Button(ventana,text='Realizar Mision', font='CenturyGothic 11', bg="white")
-
+botonciv = Button(ventana,text='Seleccionar', font='CenturyGothic 11', bg="white")
+#LABEL DE SELECCIONAR UNA ENTRADA
+le = Label(text='Selecciona una Unidad Civil:', font='CenturyGothic 15', fg='black', bg='#C8881F')
 #METODO PARA MOSTRAR LAS OPCIONES DE ROBOT DISPONIBLES Y REALIZAR LAS OPERACIONES CORRESPONDIENTES
 def tipoR():
     global corobotst
@@ -312,10 +324,10 @@ corobot = None
 def RobotS(tipo):
     global corobot
     label2 = Label(ventana, text='Selecciona un Robot:', font='CenturyGothic 15', fg='black', bg='#C8881F')
-    label2.place(x=40,y=360)
+    label2.place(x=40,y=350)
 
     corobot = ttk.Combobox(state='readonly')
-    corobot.place(x=40,y=400)
+    corobot.place(x=40,y=380)
     agregarR(tipo)
 
 #METODO PARA AGREGAR ROBOTS AL COMBOBOX
@@ -359,7 +371,7 @@ def MostrarRobot():
 #METODO PARA MOSTRAR EL BOTON DE SELECCIONAR EL ROBOT
 def bot2():
     botonr2 = Button(ventana,text='Seleccionar', font='CenturyGothic 11', bg="white", command=MostrarRobot)
-    botonr2.place(x=40,y=440)
+    botonr2.place(x=40,y=410)
 
 #METODO PARA MOSTRAR EL COMBOBOX DE RECURSOS
 def recursos():
@@ -367,8 +379,8 @@ def recursos():
     global cociudades
     global corobot
     global coresources
-    l2.place(x=40,y=500)
-    coresources.place(x=40,y=550)
+    l2.place(x=40,y=450)
+    coresources.place(x=40,y=480)
     contenido = []
     listar = Lista_Ciudades.retornarNodo(cociudades.get()).recursos
     actual = listar.cabeza
@@ -386,8 +398,8 @@ def civiles():
     global cociudades
     global cocivil
     
-    lc.place(x=40,y=500)
-    cocivil.place(x=40,y=550)
+    lc.place(x=40,y=450)
+    cocivil.place(x=40,y=480)
     contenido = []
     listac = Lista_Ciudades.retornarNodo(cociudades.get()).civiles
     actual = listac.cabeza
@@ -402,7 +414,7 @@ def civiles():
 #METODO PARA MOSTRAR EL BOTON DE SELECCIONAR EL RECURSO
 def bot3():
     botonr3 = Button(ventana,text='Seleccionar', font='CenturyGothic 11', bg="white", command=MostrarRobot)
-    botonr3.place(x=40,y=440)
+    botonr3.place(x=40,y=410)
 
 #METODO PARA OBTENER EL INDICE DEL COMBOBOX
 def ObtenerRecurso():
@@ -422,12 +434,12 @@ def ObtenerRecurso():
 #METODO PARA UBICAR EL BOTON
 def bot4():
     global botonr4
-    botonr4.place(x=40,y=600)
+    botonr4.place(x=40,y=530)
     botonr4['command'] = ObtenerRecurso
 
 def bot5():
     global botonciv
-    botonciv.place(x=40,y=600)
+    botonciv.place(x=40,y=530)
     #botonciv['command'] = ObtenerRecurso
 
 #----------------------------------METODO PARA MOSTRAR LA INFO DEL MAPA EN LA VENTANA---------------------------
