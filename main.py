@@ -39,9 +39,9 @@ labelprincipal = Label(ventana, text='Chapin-Warriors', font='CenturyGothic 20 b
 labelprincipal.place(x=110,y=25)
 
 #IMAGEN DE LOGO
-imagen = ImageTk.PhotoImage(Image.open('icono.ico').resize((60,60)))
+imagen = ImageTk.PhotoImage(Image.open('icono.ico').resize((70,70)))
 ilabel = Label(image=imagen, bg='#C8881F')
-ilabel.place(x=50, y=10)
+ilabel.place(x=30, y=10)
 
 #METODO PARA LEER UN ARCHIVO XML
 def ProcesarArchivo(ruta):
@@ -205,7 +205,7 @@ def MostrarCiudad():
 def lb():
     global Lista_Ciudades
     global cociudades
-    labelmap = Label(ventana, text='Mapa de la ciudad:', font='CenturyGothic 15', fg='black', bg='#C8881F')
+    labelmap = Label(ventana, text='Mapa de la ciudad generado con ChapinEyes:', font='CenturyGothic 15', fg='black', bg='#C8881F')
     labelmap.place(x=350,y=60)
 
 #METODO PARA MOSTRAR EL MAPA EN LA VENTANA
@@ -251,7 +251,12 @@ cocivil = ttk.Combobox(state='readonly')
 #BOTON PARA REALIZAR LA MISION DE RECURSOS
 botonciv = Button(ventana,text='Seleccionar', font='CenturyGothic 11', bg="white")
 #LABEL DE SELECCIONAR UNA ENTRADA
-le = Label(text='Selecciona una Unidad Civil:', font='CenturyGothic 15', fg='black', bg='#C8881F')
+le = Label(text='Selecciona donde empieza la mision:', font='CenturyGothic 12', fg='black', bg='#C8881F')
+#COMBOBOX DE LAS ENTRADAS
+costart = ttk.Combobox(state='readonly')
+#BOTON DE INICIAR LA MISION
+botstart = Button(ventana,text='Iniciar la Mision', font='CenturyGothic 11', bg='white')
+
 #METODO PARA MOSTRAR LAS OPCIONES DE ROBOT DISPONIBLES Y REALIZAR LAS OPERACIONES CORRESPONDIENTES
 def tipoR():
     global corobotst
@@ -264,6 +269,9 @@ def tipoR():
     global botonr2
     global botonr4
     global lc
+    global le
+    global costart
+    global botstart
     global cocivil
     global botonciv
     if corobotst.get()=="Mision de Extraccion de Recursos(ChapinFighter)":
@@ -283,8 +291,11 @@ def tipoR():
                 RobotS('ChapinFighter')
                 bot2()
             lc.place_forget()
+            le.place_forget()
             cocivil.place_forget()
-            botonciv.place_forget()  
+            costart.place_forget()
+            botonciv.place_forget()
+            botstart.place_forget()  
         else:
             messagebox.showinfo("Error","No existen recursos en esta ciudad")
     elif corobotst.get()=="Mision de Rescate(ChapinRescue)":
@@ -304,8 +315,11 @@ def tipoR():
                 RobotS('ChapinRescue')
                 bot3()
             l2.place_forget()
+            le.place_forget()
             coresources.place_forget()
-            botonr4.place_forget()    
+            costart.place_forget()
+            botonr4.place_forget()   
+            botstart.place_forget()  
         else:
             messagebox.showinfo("Error","No existen unidades civiles en esta ciudad")
     elif corobotst.get()=="":
@@ -426,21 +440,59 @@ def ObtenerRecurso():
         prueba = messagebox.askyesno(title="Robot de Combate", message="Mision de Extracción de Recursos\n\nDatos del Robot:\n     Nombre: "+str(Lista_Robots.RetornarRobot(corobot.get()).nombre) +"\n     Capacidad: "+str(Lista_Robots.RetornarRobot(corobot.get()).capacidad) +" unidades.\n\nDatos del recurso seleccionado:\n     Recurso " + str(int(coresources.current())+1) + "\n     Coordenada en X: " + str(Lista_Ciudades.retornarNodo(cociudades.get()).recursos.retornarNodo(int(coresources.current()) + 1).x) + '\n     Coordenada en Y:' + str(Lista_Ciudades.retornarNodo(cociudades.get()).recursos.retornarNodo(int(coresources.current()) + 1).y) + '\n¿Acepta continuar con la misión?')
         if prueba == True:
             print('Holi')
+            Entradas()
     else:
         prueba = messagebox.askyesno(title="Robot de Combate", message="Mision de Extracción de Recursos\n\nDatos del Robot:\n     Nombre: "+str(Lista_Robots.cabeza.nombre) +"\n     Capacidad: "+str(Lista_Robots.cabeza.capacidad) +" unidades.\n\nDatos del recurso seleccionado:\n     Recurso " + str(int(coresources.current())+1) + "\n     Coordenada en X: " + str(Lista_Ciudades.retornarNodo(cociudades.get()).recursos.retornarNodo(int(coresources.current()) + 1).x) + '\n     Coordenada en Y:' + str(Lista_Ciudades.retornarNodo(cociudades.get()).recursos.retornarNodo(int(coresources.current()) + 1).y) + '\n¿Acepta continuar con la misión?')
         if prueba == True:
             print('Holi')
+            Entradas()
+
+#METODO PARA PEDIR DONDE INICIE EL ROBOT
+def Entradas():
+    global le
+    global Lista_Ciudades
+    global cociudades
+    global costart
+    le.place(x=40,y=560)
+    costart.place(x=40,y=590)
+    listae = Lista_Ciudades.retornarNodo(cociudades.get()).entradas
+    actual = listae.cabeza
+    aux = []
+    while actual != None:
+        aux.append('Entrada' + str(actual.id) + '  x= ' + str(actual.x) + ' , y= ' + str(actual.y))
+        actual = actual.siguiente
+    costart['values']= aux
+    corobot.config(font='arial 12')
+    bstart()
 
 #METODO PARA UBICAR EL BOTON
 def bot4():
     global botonr4
-    botonr4.place(x=40,y=530)
+    botonr4.place(x=40,y=520)
     botonr4['command'] = ObtenerRecurso
 
 def bot5():
     global botonciv
-    botonciv.place(x=40,y=530)
-    #botonciv['command'] = ObtenerRecurso
+    botonciv.place(x=40,y=520)
+    botonciv['command'] = Entradas
+
+def startmision():
+    global costart
+    global cociudades
+    global cocivil
+    global Lista_Ciudades
+    global corobotst
+    if corobotst.get()=="Mision de Extraccion de Recursos(ChapinFighter)":
+        print('AUN ME FALTA XDXD')
+    elif corobotst.get()=="Mision de Rescate(ChapinRescue)":
+        entrada = Lista_Ciudades.retornarNodo(cociudades.get()).entradas.retornarNodo(int(costart.current()) + 1)
+        civil = Lista_Ciudades.retornarNodo(cociudades.get()).civiles.retornarNodo(int(cocivil.current()) + 1)
+        Lista_Ciudades.Mision_Rescate(cociudades.get(),entrada.x,entrada.y,civil.x,civil.y)
+
+def bstart():
+    global botstart
+    botstart.place(x=40,y=630)
+    botstart['command'] = startmision
 
 #----------------------------------METODO PARA MOSTRAR LA INFO DEL MAPA EN LA VENTANA---------------------------
 def labels():
