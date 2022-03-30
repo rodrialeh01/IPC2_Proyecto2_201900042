@@ -1,3 +1,4 @@
+from .MatrizDispersa import MatrizDispersa
 from .NodoCiudad import NodoCiudad
 from .NodoCelda import NodoCelda
 from tkinter import messagebox
@@ -84,21 +85,21 @@ class ListaCiudades:
         #os.startfile('Matriz_' + nodo.nombre + '.png')
         print('Grafica del patron inicial generada con exito')
 
-    def GraficarMatrizTotal(self, nodo):
+    def GraficarMatrizTotal(self, matriz, nombre):
         contenido = ''
-        file = open('MapasOperados/MisionRescate_' + str(nodo.nombre) + '.dot', 'w')
+        file = open('MapasOperados/MisionRescate_' + str(nombre) + '.dot', 'w')
         contenido += '''digraph structs {
 	node [shape=plaintext]
 	patron [fontsize="40pt", label=<
 <TABLE BORDER="0" CELLBORDER="0" CELLSPACING="2" CELLPADDING="20">\n'''
-        filas = int(nodo.matriz.filas.tamanio)
-        columnas = int(nodo.matriz.columnas.tamanio)
-        matrizc = nodo.matriz
+        filas = int(matriz.filas.tamanio)
+        print(str(filas))
+        print(str(columnas))
+        columnas = int(matriz.columnas.tamanio)
         contenido += '''<TR>
-    <TD border="0">'''+str(nodo.nombre)+'''</TD>'''
+    <TD border="0">'''+str(nombre)+'''</TD>'''
         for i in range(columnas):
             contenido += '<TD border="0">'+ str(i+1) + '</TD>'
-        
         contenido += '\n</TR>'
 
         for i in range(filas):
@@ -106,19 +107,19 @@ class ListaCiudades:
         <TD border="0">'''+str(i+1)+'''</TD>'''
 
             for j in range(columnas):
-                if nodo.matriz.retornarNodo(int(i+1), int(j+1)).caracter == '*':
+                if matriz.retornarNodo(int(i+1), int(j+1)).caracter == '*':
                     contenido+="\n<TD bgcolor=\"black\">   </TD>"
-                elif nodo.matriz.retornarNodo(int(i+1), int(j+1)).caracter == 'E':
+                elif matriz.retornarNodo(int(i+1), int(j+1)).caracter == 'E':
                     contenido+="\n<TD bgcolor=\"yellowgreen\">   </TD>"
-                elif nodo.matriz.retornarNodo(int(i+1), int(j+1)).caracter == 'C':
+                elif matriz.retornarNodo(int(i+1), int(j+1)).caracter == 'C':
                     contenido+="\n<TD bgcolor=\"royalblue1\">   </TD>"
-                elif nodo.matriz.retornarNodo(int(i+1), int(j+1)).caracter == 'R':
+                elif matriz.retornarNodo(int(i+1), int(j+1)).caracter == 'R':
                     contenido+="\n<TD bgcolor=\"grey39\">   </TD>"
-                elif nodo.matriz.retornarNodo(int(i+1), int(j+1)).caracter == 'M':
+                elif matriz.retornarNodo(int(i+1), int(j+1)).caracter == 'M':
                     contenido+="\n<TD bgcolor=\"red3\">   </TD>"
-                elif nodo.matriz.retornarNodo(int(i+1), int(j+1)).caracter == ' ':
+                elif matriz.retornarNodo(int(i+1), int(j+1)).caracter == ' ':
                     contenido+="\n<TD>   </TD>"
-                elif nodo.matriz.retornarNodo(int(i+1), int(j+1)).caracter == 'P':
+                elif matriz.retornarNodo(int(i+1), int(j+1)).caracter == 'P':
                     contenido+="\n<TD bgcolor=\"goldenrod\">   </TD>"
             contenido += '</TR>'
         contenido += '''</TABLE>>]
@@ -126,22 +127,26 @@ class ListaCiudades:
 
         file.write(contenido)
         file.close()
-        os.system('dot -Tpng MapasOperados/MisionRescate_'+str(nodo.nombre)+'.dot -o MapasOperados/MisionRescate_'+str(nodo.nombre)+'.png')
-        os.startfile('MapasOperados\MisionRescate_' + nodo.nombre + '.png')
+        os.system('dot -Tpng MapasOperados/MisionRescate_'+str(nombre)+'.dot -o MapasOperados/MisionRescate_'+str(nombre)+'.png')
+        os.startfile('MapasOperados\MisionRescate_' + nombre + '.png')
         #print('Grafica del patron inicial generada con exito')
 
     def Mision_Rescate(self,nombrec,xi,yi,xf,yf):
         #! VARIABLES PARA PODER ITERAR LA MISION
         ciudad = self.retornarNodo(nombrec)
-        entrada = ciudad.matriz.retornarNodo(xi,yi)
-        unidadcivil = ciudad.matriz.retornarNodo(xf,yf)
-        
+        matriz_aux = MatrizDispersa()
+        f = 1
+        for i in range(int(ciudad.matriz.filas.tamanio)):
+            c = 1
+            for j in range(int(ciudad.matriz.columnas.tamanio)):
+                matriz_aux.InsertarNodo(ciudad.matriz.retornarNodo(f,c).x,ciudad.matriz.retornarNodo(f,c).y,ciudad.matriz.retornarNodo(f,c).caracter,ciudad.matriz.retornarNodo(f,c).capacidad)
+                c+=1
+            f+=1
+        entrada = matriz_aux.retornarNodo(xi,yi)
+        print(str(entrada.caracter))
+        unidadcivil = matriz_aux.retornarNodo(xf,yf)
         #COMIENZA LA BUSQUEDA
         actual:NodoCelda = entrada
-        contadord = 0
-        contadori = 0
-        contadora = 0
-        contadorb = 0
         while actual != unidadcivil:
             #& ----------VERIFICAR NULOS----------------
             #^VERIFICACION IZQUIERDA
@@ -643,7 +648,7 @@ class ListaCiudades:
             print('El robot se encuentra en X: ' + str(actual.x) + ' , Y: ' + str(actual.y))
 
 
-        self.GraficarMatrizTotal(ciudad)
+        self.GraficarMatrizTotal(matriz_aux, ciudad.nombre)
     
     def __len__(self):
         return self.tamanio
