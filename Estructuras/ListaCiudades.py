@@ -94,8 +94,8 @@ class ListaCiudades:
 <TABLE BORDER="0" CELLBORDER="0" CELLSPACING="2" CELLPADDING="20">\n'''
         filas = int(matriz.filas.tamanio)
         print(str(filas))
-        print(str(columnas))
         columnas = int(matriz.columnas.tamanio)
+        print(str(columnas))
         contenido += '''<TR>
     <TD border="0">'''+str(nombre)+'''</TD>'''
         for i in range(columnas):
