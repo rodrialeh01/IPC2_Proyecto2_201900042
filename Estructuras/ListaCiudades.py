@@ -1,5 +1,6 @@
 from .NodoCiudad import NodoCiudad
 from .NodoCelda import NodoCelda
+from tkinter import messagebox
 import os
 class ListaCiudades:
     def __init__(self):
@@ -147,7 +148,7 @@ class ListaCiudades:
             if actual.izquierda == None:
                 #& ----------VERIFICAR SI EL SIGUIENTE ES UNA UNIDAD CIVIL----------------
                 #~VERIFICACION DERECHA
-                if actual.derecha != None and actual.derecha.caracter == 'C':
+                if actual.derecha.caracter == 'C':
                     if actual.derecha == unidadcivil:
                         actual = actual.derecha
                 #?VERIFICACION ABAJO
@@ -158,20 +159,17 @@ class ListaCiudades:
                 elif actual.arriba.caracter == 'C':
                     if actual.arriba == unidadcivil:
                         actual = actual.arriba
-                #& ----------CAMINOS LIBRES DIRECTOS----------------
+                #& ----------CAMINOS LIBRES DE 1 DIRECCION----------------
                 #~VERIFICACION DERECHA
-                elif actual.arriba.caracter != ' ' and actual.abajo.caracter != ' ':
-                    if actual.derecha.caracter == ' ':
+                elif actual.arriba.caracter != ' ' and actual.abajo.caracter != ' ' and actual.derecha.caracter == ' ':
                         actual = actual.derecha
                         actual.caracter = 'P'
                 #?VERIFICACION ABAJO
-                elif actual.derecha.caracter != ' ' and actual.arriba.caracter != ' ':
-                    if actual.abajo.caracter == ' ':
+                elif actual.derecha.caracter != ' ' and actual.arriba.caracter != ' ' and actual.abajo.caracter == ' ':
                         actual = actual.abajo
                         actual.caracter = 'P'
                 #*VERIFICACION ARRIBA
-                elif actual.derecha.caracter != ' ' and actual.abajo.caracter != ' ':
-                    if actual.arriba.caracter == ' ':
+                elif actual.derecha.caracter != ' ' and actual.abajo.caracter != ' ' and actual.arriba.caracter == ' ':
                         actual = actual.arriba
                         actual.caracter = 'P'
                 #& ----------CAMINOS LIBRES DE 2 DIRECCIONES----------------
@@ -186,7 +184,7 @@ class ListaCiudades:
                         actual = actual.arriba
                         actual.caracter = 'P'
                 #?VERIFICACION DERECHA-ARRIBA
-                elif actual.derecha.caracter == ' ' and actual.arriba.caracter == ' ' and actual.izquierda.caracter != ' ' and actual.abajo.caracter != ' ':
+                elif actual.derecha.caracter == ' ' and actual.arriba.caracter == ' ' and actual.abajo.caracter != ' ':
                     resta_actualx = unidadcivil.x - actual.x
                     resta_arriba = unidadcivil.x - actual.arriba.x
                     if abs(resta_arriba) < abs(resta_actualx):
@@ -195,15 +193,294 @@ class ListaCiudades:
                     else:
                         actual = actual.derecha
                         actual.caracter = 'P'
+                #!VERIFICACION DERECHA-ABAJO
+                elif actual.derecha.caracter == ' ' and actual.abajo.caracter == ' '  and actual.arriba.caracter != ' ':
+                    resta_actualx = unidadcivil.x - actual.x
+                    resta_abajo = unidadcivil.x - actual.abajo.x
+                    if abs(resta_abajo) < abs(resta_actualx):
+                        actual = actual.abajo
+                        actual.caracter = 'P'
+                    else:
+                        actual = actual.derecha
+                        actual.caracter = 'P'
+                #& ----------CAMINOS LIBRES DE 3 DIRECCIONES----------------
+                #^VERIFICACION ARRIBA-ABAJO-DERECHA
+                elif actual.derecha.caracter == ' ' and actual.abajo.caracter == ' ' and actual.arriba.caracter == ' ':
+                    resta_arriba = unidadcivil.x - actual.arriba.x
+                    resta_abajo = unidadcivil.x -actual.abajo.x
+                    resta_actual = unidadcivil.y - actual.y
+                    resta_derecha = unidadcivil.y - actual.derecha.y
+                    if abs(resta_derecha) > abs(resta_actual):
+                        if abs(resta_abajo)< abs(resta_arriba):
+                            actual = actual.abajo
+                            actual.caracter = 'P'
+                        else:
+                            actual = actual.arriba
+                            actual.caracter = 'P'
+                    else:
+                        actual = actual.derecha
+                        actual.caracter = 'P'
+                elif actual.arriba.caracter != ' ' and actual.abajo.caracter != ' ' and actual.derecha.caracter != ' ':
+                    messagebox.showinfo("Error","No se pudo realizar la mision :(")
+                    break
+                else:
+                    messagebox.showinfo("Error","No se pudo realizar la mision :(")
+                    break
+            #~VERIFICACION DERECHA
+            elif actual.derecha == None:
+                #& ----------VERIFICAR SI EL SIGUIENTE ES UNA UNIDAD CIVIL----------------
+                #^VERIFICACION IZQUIERDA
+                if actual.izquierda.caracter == 'C':
+                    if actual.izquierda == unidadcivil:
+                        actual = actual.izquierda
+                #?VERIFICACION ABAJO
+                elif actual.abajo.caracter == 'C':
+                    if actual.abajo == unidadcivil:
+                        actual = actual.abajo
                 #*VERIFICACION ARRIBA
-            else:
+                elif actual.arriba.caracter == 'C':
+                    if actual.arriba == unidadcivil:
+                        actual = actual.arriba
+                #& ----------CAMINOS LIBRES DE 1 DIRECCION----------------
+                #^VERIFICACION IZQUIERDA
+                elif actual.arriba.caracter != ' ' and actual.abajo.caracter != ' ' and actual.izquierda.caracter == ' ':
+                        actual = actual.izquierda
+                        actual.caracter = 'P'
+                #?VERIFICACION ABAJO
+                elif actual.arriba.caracter != ' ' and actual.izquierda.caracter != ' ' and actual.abajo.caracter == ' ':
+                        actual = actual.abajo
+                        actual.caracter = 'P'
+                #*VERIFICACION ARRIBA
+                elif actual.izquierda.caracter != ' ' and actual.abajo.caracter != ' ' and actual.arriba.caracter == ' ':
+                        actual = actual.arriba
+                        actual.caracter = 'P'
+                #& ----------CAMINOS LIBRES DE 2 DIRECCIONES----------------
+                #~VERIFICACION ARRIBA-ABAJO
+                elif actual.arriba.caracter == ' ' and actual.abajo.caracter == ' ' and actual.izquierda.caracter != ' ':
+                    resta_arriba = unidadcivil.x - actual.arriba.x
+                    resta_abajo = unidadcivil.x - actual.abajo.x
+                    if abs(resta_arriba) > abs(resta_abajo):
+                        actual = actual.abajo
+                        actual.caracter = 'P'
+                    else:
+                        actual = actual.arriba
+                        actual.caracter = 'P'
+                #*VERIFICACION IZQUIERDA-ARRIBA
+                elif actual.izquierda.caracter == ' ' and actual.arriba.caracter == ' ' and actual.abajo.caracter != ' ':
+                    resta_actualx = unidadcivil.x - actual.x
+                    resta_arriba = unidadcivil.x - actual.arriba.x
+                    if abs(resta_arriba) < abs(resta_actualx):
+                        actual = actual.arriba
+                        actual.caracter = 'P'
+                    else:
+                        actual = actual.izquierda
+                        actual.caracter = 'P'
+                #TODO VERIFICACION IZQUIERDA-ABAJO
+                elif actual.izquierda.caracter == ' ' and actual.abajo.caracter == ' ' and actual.arriba.caracter != ' ':
+                    resta_actualx = unidadcivil.x - actual.x
+                    resta_abajo = unidadcivil.x - actual.abajo.x
+                    if abs(resta_abajo) < abs(resta_actualx):
+                        actual = actual.abajo
+                        actual.caracter = 'P'
+                    else:
+                        actual = actual.izquierda
+                        actual.caracter = 'P'
+                #& ----------CAMINOS LIBRES DE 3 DIRECCIONES----------------
+                #~VERIFICACION ARRIBA-ABAJO-IZQUIERDA
+                elif actual.izquierda.caracter == ' ' and actual.abajo.caracter == ' ' and actual.arriba.caracter == ' ':
+                    resta_arriba = unidadcivil.x - actual.arriba.x
+                    resta_abajo = unidadcivil.x -actual.abajo.x
+                    resta_actual = unidadcivil.y - actual.y
+                    resta_izquierda = unidadcivil.y - actual.izquierda.y
+                    if abs(resta_izquierda) > abs(resta_actual):
+                        if abs(resta_abajo)< abs(resta_arriba):
+                            actual = actual.abajo
+                            actual.caracter = 'P'
+                        else:
+                            actual = actual.arriba
+                            actual.caracter = 'P'
+                    else:
+                        actual = actual.izquierda
+                        actual.caracter = 'P'
+                elif actual.arriba.caracter != ' ' and actual.abajo.caracter != ' ' and actual.izquierda.caracter != ' ':
+                    messagebox.showinfo("Error","No se pudo realizar la mision :(")
+                    break
+                else:
+                    messagebox.showinfo("Error","No se pudo realizar la mision :(")
+                    break
+            #*VERIFICACION ARRIBA
+            elif actual.arriba == None:
                 #& ----------VERIFICAR SI EL SIGUIENTE ES UNA UNIDAD CIVIL----------------
                 #~VERIFICACION DERECHA
-                if actual.derecha != None and actual.derecha.caracter == 'C':
+                if actual.derecha.caracter == 'C':
                     if actual.derecha == unidadcivil:
                         actual = actual.derecha
                 #^VERIFICACION IZQUIERDA
-                elif actual.izquierda!= None and actual.izquierda.caracter == 'C':
+                elif actual.izquierda.caracter == 'C':
+                    if actual.izquierda == unidadcivil:
+                        actual = actual.izquierda
+                #?VERIFICACION ABAJO
+                elif actual.abajo.caracter == 'C':
+                    if actual.abajo == unidadcivil:
+                        actual = actual.abajo
+                #& ----------CAMINOS LIBRES DE 1 DIRECCION----------------
+                #~VERIFICACION DERECHA
+                elif actual.izquierda.caracter != ' ' and actual.abajo.caracter != ' ' and actual.derecha.caracter == ' ':
+                        actual = actual.derecha
+                        actual.caracter = 'P'
+                #^VERIFICACION IZQUIERDA
+                elif actual.derecha.caracter != ' ' and actual.abajo.caracter != ' ' and actual.izquierda.caracter == ' ':
+                        actual = actual.izquierda
+                        actual.caracter = 'P'
+                #?VERIFICACION ABAJO
+                elif actual.derecha.caracter != ' ' and actual.izquierda.caracter != ' ' and actual.abajo.caracter == ' ':
+                        actual = actual.abajo
+                        actual.caracter = 'P'
+                #& ----------CAMINOS LIBRES DE 2 DIRECCIONES----------------
+                #^VERIFICACION IZQUIERDA-DERECHA
+                elif actual.derecha.caracter == ' ' and actual.izquierda.caracter == ' ' and actual.abajo.caracter != ' ':
+                    resta_derecha = unidadcivil.y - actual.derecha.y
+                    resta_izquierda = unidadcivil.y - actual.izquierda.y
+                    if abs(resta_derecha) > abs(resta_izquierda):
+                        actual = actual.izquierda
+                        actual.caracter = 'P'
+                    else:
+                        actual = actual.derecha
+                        actual.caracter = 'P'
+                #!VERIFICACION DERECHA-ABAJO
+                elif actual.derecha.caracter == ' ' and actual.abajo.caracter == ' ' and actual.izquierda.caracter != ' ' :
+                    resta_actualx = unidadcivil.x - actual.x
+                    resta_abajo = unidadcivil.x - actual.abajo.x
+                    if abs(resta_abajo) < abs(resta_actualx):
+                        actual = actual.abajo
+                        actual.caracter = 'P'
+                    else:
+                        actual = actual.derecha
+                        actual.caracter = 'P'
+                #TODO VERIFICACION IZQUIERDA-ABAJO
+                elif actual.izquierda.caracter == ' ' and actual.abajo.caracter == ' ' and actual.derecha.caracter != ' ' :
+                    resta_actualx = unidadcivil.x - actual.x
+                    resta_abajo = unidadcivil.x - actual.abajo.x
+                    if abs(resta_abajo) < abs(resta_actualx):
+                        actual = actual.abajo
+                        actual.caracter = 'P'
+                    else:
+                        actual = actual.izquierda
+                        actual.caracter = 'P'
+                #& ----------CAMINOS LIBRES DE 3 DIRECCIONES----------------
+                #*VERIFICACION ABAJO-IZQUIERDA-DERECHA
+                elif actual.derecha.caracter == ' ' and actual.izquierda.caracter == ' ' and actual.abajo.caracter == ' ':
+                    resta_abajo = unidadcivil.x - actual.abajo.x
+                    resta_izquierda = unidadcivil.y -actual.izquierda.y
+                    resta_actual = unidadcivil.x - actual.x
+                    resta_derecha = unidadcivil.y - actual.derecha.y
+                    if abs(resta_abajo) > abs(resta_actual):
+                        if abs(resta_izquierda)< abs(resta_derecha):
+                            actual = actual.izquierda
+                            actual.caracter = 'P'
+                        else:
+                            actual = actual.derecha
+                            actual.caracter = 'P'
+                    else:
+                        actual = actual.abajo
+                        actual.caracter = 'P'
+                elif actual.abajo.caracter != ' ' and actual.izquierda.caracter != ' ' and actual.derecha.caracter != ' ':
+                    messagebox.showinfo("Error","No se pudo realizar la mision :(")
+                    break
+                else:
+                    messagebox.showinfo("Error","No se pudo realizar la mision :(")
+                    break
+            #?VERIFICACION ABAJO
+            elif actual.abajo == None:
+                #& ----------VERIFICAR SI EL SIGUIENTE ES UNA UNIDAD CIVIL----------------
+                #~VERIFICACION DERECHA
+                if actual.derecha.caracter == 'C':
+                    if actual.derecha == unidadcivil:
+                        actual = actual.derecha
+                #^VERIFICACION IZQUIERDA
+                elif actual.izquierda.caracter == 'C':
+                    if actual.izquierda == unidadcivil:
+                        actual = actual.izquierda
+                #*VERIFICACION ARRIBA
+                elif actual.arriba.caracter == 'C':
+                    if actual.arriba == unidadcivil:
+                        actual = actual.arriba
+                #& ----------CAMINOS LIBRES DE 1 DIRECCION----------------
+                #~VERIFICACION DERECHA
+                elif actual.izquierda.caracter != ' ' and actual.arriba.caracter != ' '  and actual.derecha.caracter == ' ':
+                        actual = actual.derecha
+                        actual.caracter = 'P'
+                #^VERIFICACION IZQUIERDA
+                elif actual.derecha.caracter != ' ' and actual.arriba.caracter != ' ' and  actual.izquierda.caracter == ' ':
+                        actual = actual.izquierda
+                        actual.caracter = 'P'
+                #*VERIFICACION ARRIBA
+                elif actual.derecha.caracter != ' ' and actual.izquierda.caracter != ' ' and actual.arriba.caracter == ' ':
+                        actual = actual.arriba
+                        actual.caracter = 'P'
+                #& ----------CAMINOS LIBRES DE 2 DIRECCIONES----------------
+                #^VERIFICACION IZQUIERDA-DERECHA
+                elif actual.derecha.caracter == ' ' and actual.izquierda.caracter == ' ' and actual.arriba.caracter != ' ':
+                    resta_derecha = unidadcivil.y - actual.derecha.y
+                    resta_izquierda = unidadcivil.y - actual.izquierda.y
+                    if abs(resta_derecha) > abs(resta_izquierda):
+                        actual = actual.izquierda
+                        actual.caracter = 'P'
+                    else:
+                        actual = actual.derecha
+                        actual.caracter = 'P'
+                #?VERIFICACION DERECHA-ARRIBA
+                elif actual.derecha.caracter == ' ' and actual.arriba.caracter == ' ' and actual.izquierda.caracter != ' ':
+                    resta_actualx = unidadcivil.x - actual.x
+                    resta_arriba = unidadcivil.x - actual.arriba.x
+                    if abs(resta_arriba) < abs(resta_actualx):
+                        actual = actual.arriba
+                        actual.caracter = 'P'
+                    else:
+                        actual = actual.derecha
+                        actual.caracter = 'P'
+                #*VERIFICACION IZQUIERDA-ARRIBA
+                elif actual.izquierda.caracter == ' ' and actual.arriba.caracter == ' ' and actual.derecha.caracter != ' ':
+                    resta_actualx = unidadcivil.x - actual.x
+                    resta_arriba = unidadcivil.x - actual.arriba.x
+                    if abs(resta_arriba) < abs(resta_actualx):
+                        actual = actual.arriba
+                        actual.caracter = 'P'
+                    else:
+                        actual = actual.izquierda
+                        actual.caracter = 'P'
+                #& ----------CAMINOS LIBRES DE 3 DIRECCIONES----------------
+                #?VERIFICACION ARRIBA-IZQUIERDA-DERECHA
+                elif actual.derecha.caracter == ' ' and actual.izquierda.caracter == ' ' and actual.arriba.caracter == ' ':
+                    resta_arriba = unidadcivil.x - actual.arriba.x
+                    resta_izquierda = unidadcivil.y -actual.izquierda.y
+                    resta_actual = unidadcivil.x - actual.x
+                    resta_derecha = unidadcivil.y - actual.derecha.y
+                    if abs(resta_arriba) > abs(resta_actual):
+                        if abs(resta_izquierda)< abs(resta_derecha):
+                            actual = actual.izquierda
+                            actual.caracter = 'P'
+                        else:
+                            actual = actual.derecha
+                            actual.caracter = 'P'
+                    else:
+                        actual = actual.arriba
+                        actual.caracter = 'P'
+                elif actual.arriba.caracter != ' ' and actual.izquierda.caracter != ' ' and actual.derecha.caracter != ' ':
+                    messagebox.showinfo("Error","No se pudo realizar la mision :(")
+                    break
+                else:
+                    messagebox.showinfo("Error","No se pudo realizar la mision :(")
+                    break
+            #TODO SIN RESTRICCION DE NULOS
+            else:
+                #& ----------VERIFICAR SI EL SIGUIENTE ES UNA UNIDAD CIVIL----------------
+                #~VERIFICACION DERECHA
+                if actual.derecha.caracter == 'C':
+                    if actual.derecha == unidadcivil:
+                        actual = actual.derecha
+                #^VERIFICACION IZQUIERDA
+                elif actual.izquierda.caracter == 'C':
                     if actual.izquierda == unidadcivil:
                         actual = actual.izquierda
                 #?VERIFICACION ABAJO
@@ -216,23 +493,19 @@ class ListaCiudades:
                         actual = actual.arriba
                 #& ----------CAMINOS LIBRES DE 1 DIRECCION----------------
                 #~VERIFICACION DERECHA
-                elif actual.izquierda.caracter != ' ' and actual.arriba.caracter != ' ' and actual.abajo.caracter != ' ':
-                    if actual.derecha.caracter == ' ':
+                elif actual.izquierda.caracter != ' ' and actual.arriba.caracter != ' ' and actual.abajo.caracter != ' ' and actual.derecha.caracter == ' ':
                         actual = actual.derecha
                         actual.caracter = 'P'
                 #^VERIFICACION IZQUIERDA
-                elif actual.derecha.caracter != ' ' and actual.arriba.caracter != ' ' and actual.abajo.caracter != ' ':
-                    if actual.izquierda.caracter == ' ':
+                elif actual.derecha.caracter != ' ' and actual.arriba.caracter != ' ' and actual.abajo.caracter != ' ' and actual.izquierda.caracter == ' ':
                         actual = actual.izquierda
                         actual.caracter = 'P'
                 #?VERIFICACION ABAJO
-                elif actual.derecha.caracter != ' ' and actual.arriba.caracter != ' ' and actual.izquierda.caracter != ' ':
-                    if actual.abajo.caracter == ' ':
+                elif actual.derecha.caracter != ' ' and actual.arriba.caracter != ' ' and actual.izquierda.caracter != ' ' and actual.abajo.caracter == ' ':
                         actual = actual.abajo
                         actual.caracter = 'P'
                 #*VERIFICACION ARRIBA
-                elif actual.derecha.caracter != ' ' and actual.izquierda.caracter != ' ' and actual.abajo.caracter != ' ':
-                    if actual.arriba.caracter == ' ':
+                elif actual.derecha.caracter != ' ' and actual.izquierda.caracter != ' ' and actual.abajo.caracter != ' ' and actual.arriba.caracter == ' ':
                         actual = actual.arriba
                         actual.caracter = 'P'
                 #& ----------CAMINOS LIBRES DE 2 DIRECCIONES----------------
@@ -329,7 +602,45 @@ class ListaCiudades:
                     else:
                         actual = actual.derecha
                         actual.caracter = 'P'
-
+                #?VERIFICACION ARRIBA-IZQUIERDA-DERECHA
+                elif actual.derecha.caracter == ' ' and actual.izquierda.caracter == ' ' and actual.arriba.caracter == ' ' and actual.abajo.caracter != ' ':
+                    resta_arriba = unidadcivil.x - actual.arriba.x
+                    resta_izquierda = unidadcivil.y -actual.izquierda.y
+                    resta_actual = unidadcivil.x - actual.x
+                    resta_derecha = unidadcivil.y - actual.derecha.y
+                    if abs(resta_arriba) > abs(resta_actual):
+                        if abs(resta_izquierda)< abs(resta_derecha):
+                            actual = actual.izquierda
+                            actual.caracter = 'P'
+                        else:
+                            actual = actual.derecha
+                            actual.caracter = 'P'
+                    else:
+                        actual = actual.arriba
+                        actual.caracter = 'P'
+                #*VERIFICACION ABAJO-IZQUIERDA-DERECHA
+                elif actual.derecha.caracter == ' ' and actual.izquierda.caracter == ' ' and actual.abajo.caracter == ' ' and actual.arriba.caracter != ' ':
+                    resta_abajo = unidadcivil.x - actual.abajo.x
+                    resta_izquierda = unidadcivil.y -actual.izquierda.y
+                    resta_actual = unidadcivil.x - actual.x
+                    resta_derecha = unidadcivil.y - actual.derecha.y
+                    if abs(resta_abajo) > abs(resta_actual):
+                        if abs(resta_izquierda)< abs(resta_derecha):
+                            actual = actual.izquierda
+                            actual.caracter = 'P'
+                        else:
+                            actual = actual.derecha
+                            actual.caracter = 'P'
+                    else:
+                        actual = actual.abajo
+                        actual.caracter = 'P'
+                elif actual.arriba.caracter != ' ' and actual.abajo.caracter != ' ' and actual.izquierda.caracter != ' ' and actual.derecha.caracter != ' ':
+                    messagebox.showinfo("Error","No se pudo realizar la mision :(")
+                    break
+                else:
+                    messagebox.showinfo("Error","No se pudo realizar la mision :(")
+                    break
+            print('El robot se encuentra en X: ' + str(actual.x) + ' , Y: ' + str(actual.y))
 
 
         self.GraficarMatrizTotal(ciudad)
