@@ -46,8 +46,8 @@ class ListaCiudades:
         file = open('MapasGenerados/Matriz_' + str(nodo.nombre) + '.dot', 'w')
         contenido += '''digraph structs {
 	node [shape=plaintext]
-	patron [fontsize="40pt", label=<
-<TABLE BORDER="0" CELLBORDER="0" CELLSPACING="2" CELLPADDING="20">\n'''
+	patron [fontname="Roboto Condensed"fontsize="15pt", label=<
+<TABLE BORDER="0" CELLBORDER="0" CELLSPACING="2" CELLPADDING="10">\n'''
         filas = int(nodo.matriz.filas.tamanio)
         columnas = int(nodo.matriz.columnas.tamanio)
         matrizc = nodo.matriz
@@ -85,13 +85,13 @@ class ListaCiudades:
         #os.startfile('Matriz_' + nodo.nombre + '.png')
         print('Grafica del patron inicial generada con exito')
 
-    def GraficarMatrizTotal(self, matriz, nombre):
+    def GraficarMatrizTotal(self, matriz, nombre, robot, civil):
         contenido = ''
         file = open('MapasOperados/MisionRescate_' + str(nombre) + '.dot', 'w')
         contenido += '''digraph structs {
 	node [shape=plaintext]
-	patron [fontsize="40pt", label=<
-<TABLE BORDER="0" CELLBORDER="0" CELLSPACING="2" CELLPADDING="20">\n'''
+	patron [fontname="Roboto Condensed"fontsize="15pt", label=<
+<TABLE BORDER="0" CELLBORDER="0" CELLSPACING="2" CELLPADDING="10">\n'''
         filas = int(matriz.filas.tamanio)
         print(str(filas))
         columnas = int(matriz.columnas.tamanio)
@@ -122,8 +122,8 @@ class ListaCiudades:
                 elif matriz.retornarNodo(int(i+1), int(j+1)).caracter == 'P':
                     contenido+="\n<TD bgcolor=\"goldenrod\">   </TD>"
             contenido += '</TR>'
-        contenido += '''</TABLE>>]
-}'''
+        contenido += '''</TABLE>>]'''
+        contenido += '''fontname="Roboto Condensed"fontsize="20pt"label="Tipo de Mision: Rescate\\nUnidad Civil Rescatada: ''' + str(civil.x) + ',' + str(civil.y) + '''\\nRobot Utilizado: ''' + str(robot.nombre) + '(' + str(robot.tipo) + ''')"\n}'''
 
         file.write(contenido)
         file.close()
@@ -131,7 +131,7 @@ class ListaCiudades:
         os.startfile('MapasOperados\MisionRescate_' + nombre + '.png')
         #print('Grafica del patron inicial generada con exito')
 
-    def Mision_Rescate(self,nombrec,xi,yi,xf,yf):
+    def Mision_Rescate(self,nombrec,xi,yi,xf,yf, robot):
         #! VARIABLES PARA PODER ITERAR LA MISION
         ciudad = self.retornarNodo(nombrec)
         matriz_aux = MatrizDispersa()
@@ -226,10 +226,10 @@ class ListaCiudades:
                         actual = actual.derecha
                         actual.caracter = 'P'
                 elif actual.arriba.caracter != ' ' and actual.abajo.caracter != ' ' and actual.derecha.caracter != ' ':
-                    messagebox.showinfo("Error","No se pudo realizar la mision :(")
+                    
                     break
                 else:
-                    messagebox.showinfo("Error","No se pudo realizar la mision :(")
+                    
                     break
             #~VERIFICACION DERECHA
             elif actual.derecha == None:
@@ -308,10 +308,10 @@ class ListaCiudades:
                         actual = actual.izquierda
                         actual.caracter = 'P'
                 elif actual.arriba.caracter != ' ' and actual.abajo.caracter != ' ' and actual.izquierda.caracter != ' ':
-                    messagebox.showinfo("Error","No se pudo realizar la mision :(")
+                    
                     break
                 else:
-                    messagebox.showinfo("Error","No se pudo realizar la mision :(")
+                    
                     break
             #*VERIFICACION ARRIBA
             elif actual.arriba == None:
@@ -390,10 +390,10 @@ class ListaCiudades:
                         actual = actual.abajo
                         actual.caracter = 'P'
                 elif actual.abajo.caracter != ' ' and actual.izquierda.caracter != ' ' and actual.derecha.caracter != ' ':
-                    messagebox.showinfo("Error","No se pudo realizar la mision :(")
+                    
                     break
                 else:
-                    messagebox.showinfo("Error","No se pudo realizar la mision :(")
+                    
                     break
             #?VERIFICACION ABAJO
             elif actual.abajo == None:
@@ -472,10 +472,10 @@ class ListaCiudades:
                         actual = actual.arriba
                         actual.caracter = 'P'
                 elif actual.arriba.caracter != ' ' and actual.izquierda.caracter != ' ' and actual.derecha.caracter != ' ':
-                    messagebox.showinfo("Error","No se pudo realizar la mision :(")
+                    
                     break
                 else:
-                    messagebox.showinfo("Error","No se pudo realizar la mision :(")
+                    
                     break
             #TODO SIN RESTRICCION DE NULOS
             else:
@@ -640,15 +640,15 @@ class ListaCiudades:
                         actual = actual.abajo
                         actual.caracter = 'P'
                 elif actual.arriba.caracter != ' ' and actual.abajo.caracter != ' ' and actual.izquierda.caracter != ' ' and actual.derecha.caracter != ' ':
-                    messagebox.showinfo("Error","No se pudo realizar la mision :(")
                     break
                 else:
-                    messagebox.showinfo("Error","No se pudo realizar la mision :(")
                     break
             print('El robot se encuentra en X: ' + str(actual.x) + ' , Y: ' + str(actual.y))
 
-
-        self.GraficarMatrizTotal(matriz_aux, ciudad.nombre)
-    
+        if actual == unidadcivil:
+            messagebox.showinfo("Success","Mision cumplida!, Logramos encontrar la Unidad Civil en la zona")
+            self.GraficarMatrizTotal(matriz_aux, ciudad.nombre, robot,unidadcivil)
+        else:
+            messagebox.showinfo("Error","No se pudo realizar la mision :(")
     def __len__(self):
         return self.tamanio

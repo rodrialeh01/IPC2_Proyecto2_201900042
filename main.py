@@ -83,13 +83,9 @@ def ProcesarArchivo(ruta):
                             nodo = Lista_Ciudades.retornarNodo(str(element[0].text))
                             nodo.filas = int(element[0].attrib.get('filas'))
                             nodo.columnas = int(element[0].attrib.get('columnas'))
-                            nodo.matriz = None
                             nodo.matriz = MatrizDispersa()
-                            nodo.recursos = None
                             nodo.recursos = ListaRecursos()
-                            nodo.civiles = None
                             nodo.civiles = ListaUCiviles()
-                            nodo.entradas = None
                             nodo.entradas = ListaEntradas()
                             contador = 1
                             c = 1
@@ -487,7 +483,7 @@ def startmision():
     elif corobotst.get()=="Mision de Rescate(ChapinRescue)":
         entrada = Lista_Ciudades.retornarNodo(cociudades.get()).entradas.retornarNodo(int(costart.current()) + 1)
         civil = Lista_Ciudades.retornarNodo(cociudades.get()).civiles.retornarNodo(int(cocivil.current()) + 1)
-        Lista_Ciudades.Mision_Rescate(cociudades.get(),entrada.x,entrada.y,civil.x,civil.y)
+        Lista_Ciudades.Mision_Rescate(cociudades.get(),entrada.x,entrada.y,civil.x,civil.y,Lista_Robots.RetornarRobot(corobot.get()))
 
 def bstart():
     global botstart
