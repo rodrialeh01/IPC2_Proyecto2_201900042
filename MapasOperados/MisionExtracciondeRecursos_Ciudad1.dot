@@ -82,7 +82,7 @@ digraph structs {
 <TD bgcolor="black">   </TD>
 <TD bgcolor="black">   </TD>
 <TD bgcolor="black">   </TD>
-<TD>   </TD>
+<TD bgcolor="goldenrod">   </TD>
 <TD bgcolor="black">   </TD>
 <TD bgcolor="black">   </TD>
 <TD bgcolor="black">   </TD>
@@ -104,17 +104,17 @@ digraph structs {
 <TD>   </TD>
 <TD>   </TD>
 <TD>   </TD>
-<TD>   </TD>
-<TD>   </TD>
-<TD>   </TD>
-<TD>   </TD>
-<TD bgcolor="red3">   </TD>
-<TD>   </TD>
-<TD>   </TD>
-<TD>   </TD>
-<TD>   </TD>
-<TD bgcolor="red3">   </TD>
-<TD bgcolor="red3">   </TD></TR>
+<TD bgcolor="goldenrod">   </TD>
+<TD bgcolor="goldenrod">   </TD>
+<TD bgcolor="goldenrod">   </TD>
+<TD bgcolor="goldenrod">   </TD>
+<TD bgcolor="orangered">   </TD>
+<TD bgcolor="goldenrod">   </TD>
+<TD bgcolor="goldenrod">   </TD>
+<TD bgcolor="goldenrod">   </TD>
+<TD bgcolor="goldenrod">   </TD>
+<TD bgcolor="orangered">   </TD>
+<TD bgcolor="orangered">   </TD></TR>
 <TR>
         <TD border="0">6</TD>
 <TD bgcolor="black">   </TD>
@@ -239,10 +239,10 @@ digraph structs {
 <TD>   </TD>
 <TD>   </TD>
 <TD>   </TD>
-<TD bgcolor="goldenrod">   </TD>
+<TD>   </TD>
 <TD bgcolor="red3">   </TD>
-<TD bgcolor="goldenrod">   </TD>
-<TD bgcolor="goldenrod">   </TD>
+<TD>   </TD>
+<TD>   </TD>
 <TD>   </TD>
 <TD>   </TD>
 <TD>   </TD>
@@ -261,10 +261,10 @@ digraph structs {
 <TD>   </TD>
 <TD bgcolor="black">   </TD>
 <TD bgcolor="black">   </TD>
-<TD bgcolor="goldenrod">   </TD>
+<TD>   </TD>
 <TD bgcolor="black">   </TD>
 <TD bgcolor="black">   </TD>
-<TD bgcolor="goldenrod">   </TD>
+<TD>   </TD>
 <TD bgcolor="black">   </TD>
 <TD bgcolor="black">   </TD>
 <TD bgcolor="black">   </TD>
@@ -280,13 +280,13 @@ digraph structs {
 <TD>   </TD>
 <TD>   </TD>
 <TD bgcolor="yellowgreen">   </TD>
-<TD bgcolor="goldenrod">   </TD>
+<TD>   </TD>
 <TD bgcolor="black">   </TD>
 <TD bgcolor="black">   </TD>
-<TD bgcolor="goldenrod">   </TD>
+<TD>   </TD>
 <TD bgcolor="black">   </TD>
 <TD bgcolor="grey39">   </TD>
-<TD bgcolor="goldenrod">   </TD>
+<TD>   </TD>
 <TD bgcolor="black">   </TD>
 <TD bgcolor="black">   </TD>
 <TD bgcolor="black">   </TD>
@@ -303,9 +303,9 @@ digraph structs {
 <TD bgcolor="black">   </TD>
 <TD bgcolor="black">   </TD>
 <TD bgcolor="red3">   </TD>
-<TD bgcolor="goldenrod">   </TD>
-<TD bgcolor="goldenrod">   </TD>
-<TD bgcolor="goldenrod">   </TD>
+<TD>   </TD>
+<TD>   </TD>
+<TD>   </TD>
 <TD>   </TD>
 <TD>   </TD>
 <TD>   </TD>
@@ -334,5 +334,5 @@ digraph structs {
 <TD bgcolor="black">   </TD>
 <TD bgcolor="black">   </TD>
 <TD bgcolor="black">   </TD>
-<TD bgcolor="black">   </TD></TR></TABLE>>]fontname="Roboto Condensed"fontsize="20pt"label="Tipo de Mision: Extraccion de Recursos\nRecurso Extraido: 13,15\nRobot Utilizado: robot01(ChapinFighter - Capacidad de combate inicial 100, Capacidad de combate final 40)"
+<TD bgcolor="black">   </TD></TR></TABLE>>]fontname="Roboto Condensed"fontsize="20pt"label="Tipo de Mision: Extraccion de Recursos\nRecurso Extraido: 4,20\nRobot Utilizado: robot03(ChapinFighter - Capacidad de combate inicial 200, Capacidad de combate final 140)"
 }

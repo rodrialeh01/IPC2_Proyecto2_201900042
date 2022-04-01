@@ -106,7 +106,7 @@ def ProcesarArchivo(ruta):
                                             nodo.civiles.InsertarNodo(int(cc),int(subelement.attrib.get('numero')),int(contadorc))
                                             cc += 1
                                         elif caracter == 'E':
-                                            Lista_Ciudades.cola.entradas.InsertarNodo(int(ce), int(subelement.attrib.get('numero')), int(contadorc))
+                                            nodo.entradas.InsertarNodo(int(ce), int(subelement.attrib.get('numero')), int(contadorc))
                                             ce += 1
                                         contadorc+=1
                                 elif subelement.tag == "unidadMilitar":

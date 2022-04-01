@@ -52,7 +52,7 @@ class ListaCiudades:
         columnas = int(nodo.matriz.columnas.tamanio)
         matrizc = nodo.matriz
         contenido += '''<TR>
-    <TD border="0">'''+str(nodo.nombre)+'''</TD>'''
+    <TD border="0"></TD>'''
         for i in range(columnas):
             contenido += '<TD border="0">'+ str(i+1) + '</TD>'
         
@@ -76,8 +76,8 @@ class ListaCiudades:
                 elif nodo.matriz.retornarNodo(int(i+1), int(j+1)).caracter == ' ':
                     contenido+="\n<TD>   </TD>"
             contenido += '</TR>'
-        contenido += '''</TABLE>>]
-}'''
+        contenido += '''</TABLE>>]'''
+        contenido += '''fontname="Roboto Condensed"fontsize="35pt"label="'''+str(nodo.nombre)+'''"\n}'''
 
         file.write(contenido)
         file.close()
@@ -123,7 +123,38 @@ class ListaCiudades:
                     contenido+="\n<TD bgcolor=\"goldenrod\">   </TD>"
             contenido += '</TR>'
         contenido += '''</TABLE>>]'''
-        contenido += '''fontname="Roboto Condensed"fontsize="20pt"label="Tipo de Mision: Rescate\\nUnidad Civil Rescatada: ''' + str(civil.x) + ',' + str(civil.y) + '''\\nRobot Utilizado: ''' + str(robot.nombre) + '(' + str(robot.tipo) + ''')"\n}'''
+        contenido += '''fontname="Roboto Condensed"fontsize="20pt"label="Tipo de Mision: Rescate\\nUnidad Civil Rescatada: ''' + str(civil.x) + ',' + str(civil.y) + '''\\nRobot Utilizado: ''' + str(robot.nombre) + '(' + str(robot.tipo) + ''')"\n'''
+        contenido += '''info1[fontname="Roboto Condensed"fontsize="15pt", label=<
+<TABLE BORDER="0" CELLBORDER="0" CELLSPACING="3" CELLPADDING="10">
+<TR>
+    <TD border="0" bgcolor="yellowgreen"></TD> 
+    <TD border="0">Camino de Entrada </TD> 
+</TR>
+<TR>
+    <TD border="0" bgcolor="black"></TD> 
+    <TD border="0">Intransitable </TD> 
+</TR>
+<TR>
+    <TD border="0" bgcolor="royalblue1"></TD> 
+    <TD border="0">Unidad Civil</TD> 
+</TR>
+<TR>
+    <TD border="0" bgcolor="red3"></TD> 
+    <TD border="0">Unidad Militar</TD> 
+</TR>
+<TR>
+    <TD border="0" bgcolor="grey39"></TD> 
+    <TD border="0">Recurso</TD> 
+</TR>
+<TR>
+    <TD border="0" bgcolor="white"></TD> 
+    <TD border="0">Camino</TD> 
+</TR>
+<TR>
+    <TD border="0" bgcolor="goldenrod"></TD> 
+    <TD border="0">Camino del Robot</TD> 
+</TR>
+</TABLE>>]\n}'''
 
         file.write(contenido)
         file.close()
@@ -164,14 +195,49 @@ class ListaCiudades:
                 elif matriz.retornarNodo(int(i+1), int(j+1)).caracter == 'M':
                     contenido+="\n<TD bgcolor=\"red3\">   </TD>"
                 elif matriz.retornarNodo(int(i+1), int(j+1)).caracter == 'MP':
-                    contenido+="\n<TD bgcolor=\"red3\">   </TD>"
+                    contenido+="\n<TD bgcolor=\"orangered\">   </TD>"
                 elif matriz.retornarNodo(int(i+1), int(j+1)).caracter == ' ':
                     contenido+="\n<TD>   </TD>"
                 elif matriz.retornarNodo(int(i+1), int(j+1)).caracter == 'P':
                     contenido+="\n<TD bgcolor=\"goldenrod\">   </TD>"
             contenido += '</TR>'
         contenido += '''</TABLE>>]'''
-        contenido += '''fontname="Roboto Condensed"fontsize="20pt"label="Tipo de Mision: Extraccion de Recursos\\nRecurso Extraido: ''' + str(recurso.x) + ',' + str(recurso.y) + '''\\nRobot Utilizado: ''' + str(robot.nombre) + '(' + str(robot.tipo) + ''' - Capacidad de combate inicial ''' + str(ci) + ''', Capacidad de combate final '''+str(cf)+''')"\n}'''
+        contenido += '''fontname="Roboto Condensed"fontsize="20pt"label="Tipo de Mision: Extraccion de Recursos\\nRecurso Extraido: ''' + str(recurso.x) + ',' + str(recurso.y) + '''\\nRobot Utilizado: ''' + str(robot.nombre) + '(' + str(robot.tipo) + ''' - Capacidad de combate inicial ''' + str(ci) + ''', Capacidad de combate final '''+str(cf)+''')"\n'''
+        contenido += '''info1[fontname="Roboto Condensed"fontsize="15pt", label=<
+<TABLE BORDER="0" CELLBORDER="0" CELLSPACING="3" CELLPADDING="10">
+<TR>
+    <TD border="0" bgcolor="yellowgreen"></TD> 
+    <TD border="0">Camino de Entrada </TD> 
+</TR>
+<TR>
+    <TD border="0" bgcolor="black"></TD> 
+    <TD border="0">Intransitable </TD> 
+</TR>
+<TR>
+    <TD border="0" bgcolor="royalblue1"></TD> 
+    <TD border="0">Unidad Civil</TD> 
+</TR>
+<TR>
+    <TD border="0" bgcolor="red3"></TD> 
+    <TD border="0">Unidad Militar</TD> 
+</TR>
+<TR>
+    <TD border="0" bgcolor="grey39"></TD> 
+    <TD border="0">Recurso</TD> 
+</TR>
+<TR>
+    <TD border="0" bgcolor="white"></TD> 
+    <TD border="0">Camino</TD> 
+</TR>
+<TR>
+    <TD border="0" bgcolor="goldenrod"></TD> 
+    <TD border="0">Camino del Robot</TD> 
+</TR>
+<TR>
+    <TD border="0" bgcolor="orangered"></TD> 
+    <TD border="0">Unidad Militar derrotada</TD> 
+</TR>
+</TABLE>>]\n}'''
 
         file.write(contenido)
         file.close()
@@ -745,6 +811,7 @@ class ListaCiudades:
                     aux = aux - umilitar.capacidad
                     print(str(aux))
                     if aux < 0:
+                        robot.capacidad = 0
                         messagebox.showinfo("Error","No se pudo realizar la mision ya que la unidad militar x: " + str(umilitar.x) + ", y: " + str(umilitar.y) + " derrotó al robot " + str(robot.nombre) + ".")
                         break
                     actual.caracter = 'MP'
@@ -754,6 +821,7 @@ class ListaCiudades:
                     umilitar = matriz_aux.retornarNodo(actual.x,actual.y)
                     aux = aux - umilitar.capacidad
                     if aux < 0:
+                        robot.capacidad = 0
                         messagebox.showinfo("Error","No se pudo realizar la mision ya que la unidad militar x: " + str(umilitar.x) + ", y: " + str(umilitar.y) + " derrotó al robot " + str(robot.nombre) + ".")
                         break
                     actual.caracter = 'MP'
@@ -763,6 +831,7 @@ class ListaCiudades:
                     umilitar = matriz_aux.retornarNodo(actual.x,actual.y)
                     aux = aux - umilitar.capacidad
                     if aux < 0:
+                        robot.capacidad = 0
                         messagebox.showinfo("Error","No se pudo realizar la mision ya que la unidad militar x: " + str(umilitar.x) + ", y: " + str(umilitar.y) + " derrotó al robot " + str(robot.nombre) + ".")
                         break
                     actual.caracter = 'MP'
@@ -853,6 +922,7 @@ class ListaCiudades:
                     umilitar = matriz_aux.retornarNodo(actual.x,actual.y)
                     aux = aux - umilitar.capacidad
                     if aux < 0:
+                        robot.capacidad = 0
                         messagebox.showinfo("Error","No se pudo realizar la mision ya que la unidad militar x: " + str(umilitar.x) + ", y: " + str(umilitar.y) + " derrotó al robot " + str(robot.nombre) + ".")
                         break
                     actual.caracter = 'MP'
@@ -862,6 +932,7 @@ class ListaCiudades:
                     umilitar = matriz_aux.retornarNodo(actual.x,actual.y)
                     aux = aux - umilitar.capacidad
                     if aux < 0:
+                        robot.capacidad = 0
                         messagebox.showinfo("Error","No se pudo realizar la mision ya que la unidad militar x: " + str(umilitar.x) + ", y: " + str(umilitar.y) + " derrotó al robot " + str(robot.nombre) + ".")
                         break
                     actual.caracter = 'MP'
@@ -871,6 +942,7 @@ class ListaCiudades:
                     umilitar = matriz_aux.retornarNodo(actual.x,actual.y)
                     aux = aux - umilitar.capacidad
                     if aux < 0:
+                        robot.capacidad = 0
                         messagebox.showinfo("Error","No se pudo realizar la mision ya que la unidad militar x: " + str(umilitar.x) + ", y: " + str(umilitar.y) + " derrotó al robot " + str(robot.nombre) + ".")
                         break
                     actual.caracter = 'MP'
@@ -963,6 +1035,7 @@ class ListaCiudades:
                     umilitar = matriz_aux.retornarNodo(actual.x,actual.y)
                     aux = aux - umilitar.capacidad
                     if aux < 0:
+                        robot.capacidad = 0
                         messagebox.showinfo("Error","No se pudo realizar la mision ya que la unidad militar x: " + str(umilitar.x) + ", y: " + str(umilitar.y) + " derrotó al robot " + str(robot.nombre) + ".")
                         break
                     actual.caracter = 'MP'
@@ -972,6 +1045,7 @@ class ListaCiudades:
                     umilitar = matriz_aux.retornarNodo(actual.x,actual.y)
                     aux = aux - umilitar.capacidad
                     if aux < 0:
+                        robot.capacidad = 0
                         messagebox.showinfo("Error","No se pudo realizar la mision ya que la unidad militar x: " + str(umilitar.x) + ", y: " + str(umilitar.y) + " derrotó al robot " + str(robot.nombre) + ".")
                         break
                     actual.caracter = 'MP'
@@ -981,6 +1055,7 @@ class ListaCiudades:
                     umilitar = matriz_aux.retornarNodo(actual.x,actual.y)
                     aux = aux - umilitar.capacidad
                     if aux < 0:
+                        robot.capacidad = 0
                         messagebox.showinfo("Error","No se pudo realizar la mision ya que la unidad militar x: " + str(umilitar.x) + ", y: " + str(umilitar.y) + " derrotó al robot " + str(robot.nombre) + ".")
                         break
                     actual.caracter = 'MP'
@@ -1073,6 +1148,7 @@ class ListaCiudades:
                     umilitar = matriz_aux.retornarNodo(actual.x,actual.y)
                     aux = aux - umilitar.capacidad
                     if aux < 0:
+                        robot.capacidad = 0
                         messagebox.showinfo("Error","No se pudo realizar la mision ya que la unidad militar x: " + str(umilitar.x) + ", y: " + str(umilitar.y) + " derrotó al robot " + str(robot.nombre) + ".")
                         break
                     actual.caracter = 'MP'
@@ -1082,6 +1158,7 @@ class ListaCiudades:
                     umilitar = matriz_aux.retornarNodo(actual.x,actual.y)
                     aux = aux - umilitar.capacidad
                     if aux < 0:
+                        robot.capacidad = 0
                         messagebox.showinfo("Error","No se pudo realizar la mision ya que la unidad militar x: " + str(umilitar.x) + ", y: " + str(umilitar.y) + " derrotó al robot " + str(robot.nombre) + ".")
                         break
                     actual.caracter = 'MP'
@@ -1091,6 +1168,7 @@ class ListaCiudades:
                     umilitar = matriz_aux.retornarNodo(actual.x,actual.y)
                     aux = aux - umilitar.capacidad
                     if aux < 0:
+                        robot.capacidad = 0
                         messagebox.showinfo("Error","No se pudo realizar la mision ya que la unidad militar x: " + str(umilitar.x) + ", y: " + str(umilitar.y) + " derrotó al robot " + str(robot.nombre) + ".")
                         break
                     actual.caracter = 'MP'
@@ -1190,6 +1268,7 @@ class ListaCiudades:
                     aux = aux - umilitar.capacidad
                     print('Capacidad final: '+str(aux))
                     if aux < 0:
+                        robot.capacidad = 0
                         messagebox.showinfo("Error","No se pudo realizar la mision ya que la unidad militar x: " + str(umilitar.x) + ", y: " + str(umilitar.y) + " derrotó al robot " + str(robot.nombre) + ".")
                         break
                     actual.caracter = 'MP'
@@ -1199,6 +1278,7 @@ class ListaCiudades:
                     umilitar = matriz_aux.retornarNodo(actual.x,actual.y)
                     aux = aux - umilitar.capacidad
                     if aux < 0:
+                        robot.capacidad = 0
                         messagebox.showinfo("Error","No se pudo realizar la mision ya que la unidad militar x: " + str(umilitar.x) + ", y: " + str(umilitar.y) + " derrotó al robot " + str(robot.nombre) + ".")
                         break
                     actual.caracter = 'MP'
@@ -1208,6 +1288,7 @@ class ListaCiudades:
                     umilitar = matriz_aux.retornarNodo(actual.x,actual.y)
                     aux = aux - umilitar.capacidad
                     if aux < 0:
+                        robot.capacidad = 0
                         messagebox.showinfo("Error","No se pudo realizar la mision ya que la unidad militar x: " + str(umilitar.x) + ", y: " + str(umilitar.y) + " derrotó al robot " + str(robot.nombre) + ".")
                         break
                     actual.caracter = 'MP'
@@ -1217,6 +1298,7 @@ class ListaCiudades:
                     umilitar = matriz_aux.retornarNodo(actual.x,actual.y)
                     aux = aux - umilitar.capacidad
                     if aux < 0:
+                        robot.capacidad = 0
                         messagebox.showinfo("Error","No se pudo realizar la mision ya que la unidad militar x: " + str(umilitar.x) + ", y: " + str(umilitar.y) + " derrotó al robot " + str(robot.nombre) + ".")
                         break
                     actual.caracter = 'MP'
@@ -1372,7 +1454,7 @@ class ListaCiudades:
             messagebox.showinfo("Success","Mision cumplida!, Logramos extraer los recursos de la ciudad")
             self.GraficarMatrizExtraccionRecursos(matriz_aux,nombrec,robot,recurso,capinicial,aux)
 
-        capinicial = aux
+        robot.capacidad = aux
 
 
     def __len__(self):
