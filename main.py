@@ -76,8 +76,10 @@ def ProcesarArchivo(ruta):
                                             ce += 1
                                         contadorc+=1
                                 elif subelement.tag == "unidadMilitar":
+                                    celda = Lista_Ciudades.retornarNodo(str(element[0].text)).matriz.retornarNodo(int(subelement.attrib.get('fila')),int(subelement.attrib.get('columna')))
                                     capacidad = int(subelement.text)
-                                    Lista_Ciudades.cola.matriz.InsertarNodo(int(subelement.attrib.get('fila')),int(subelement.attrib.get('columna')),'M',capacidad)
+                                    celda.caracter = 'M'
+                                    celda.capacidad = capacidad
                                     contador += 1
                         else:
                             nodo = Lista_Ciudades.retornarNodo(str(element[0].text))
@@ -108,8 +110,10 @@ def ProcesarArchivo(ruta):
                                             ce += 1
                                         contadorc+=1
                                 elif subelement.tag == "unidadMilitar":
+                                    celda = nodo.matriz.retornarNodo(int(subelement.attrib.get('fila')),int(subelement.attrib.get('columna')))
                                     capacidad = int(subelement.text)
-                                    Lista_Ciudades.cola.matriz.InsertarNodo(int(subelement.attrib.get('fila')),int(subelement.attrib.get('columna')),'M',capacidad)
+                                    celda.caracter = 'M'
+                                    celda.capacidad = capacidad
                                     contador += 1
                 elif root[i].tag == "robots":
                     for element in root[i]:
@@ -475,11 +479,15 @@ def bot5():
 def startmision():
     global costart
     global cociudades
+    global coresources
     global cocivil
     global Lista_Ciudades
     global corobotst
     if corobotst.get()=="Mision de Extraccion de Recursos(ChapinFighter)":
-        print('AUN ME FALTA XDXD')
+        entrada = Lista_Ciudades.retornarNodo(cociudades.get()).entradas.retornarNodo(int(costart.current()) + 1)
+        recurso = Lista_Ciudades.retornarNodo(cociudades.get()).recursos.retornarNodo(int(coresources.current()) + 1)
+        Lista_Ciudades.Mision_Recursos(cociudades.get(),Lista_Robots.RetornarRobot(corobot.get()),entrada.x,entrada.y,recurso.x,recurso.y)
+        
     elif corobotst.get()=="Mision de Rescate(ChapinRescue)":
         entrada = Lista_Ciudades.retornarNodo(cociudades.get()).entradas.retornarNodo(int(costart.current()) + 1)
         civil = Lista_Ciudades.retornarNodo(cociudades.get()).civiles.retornarNodo(int(cocivil.current()) + 1)
