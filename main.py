@@ -281,7 +281,7 @@ def tipoR():
             elif Lista_Robots.CantidadporTipo('ChapinFighter') == 1:
                 if len(Lista_Ciudades.retornarNodo(cociudades.get()).recursos) == 0:
                     messagebox.showinfo("Error","No se puede realizar misiones de extracción de recursos porque esta ciudad no cuenta con recursos.")
-                elif len(Lista_Ciudades.retornarNodo(cociudades.get()).recursos) > 1:
+                else:
                     recursos()
             else:
                 RobotS('ChapinFighter')
@@ -301,7 +301,7 @@ def tipoR():
             elif Lista_Robots.CantidadporTipo('ChapinRescue') == 1:
                 if len(Lista_Ciudades.retornarNodo(cociudades.get()).civiles) == 0:
                     messagebox.showinfo("Error","No se puede realizar misiones de rescate porque esta ciudad no cuenta con Unidades Civiles")
-                elif len(Lista_Ciudades.retornarNodo(cociudades.get()).civiles) > 1:
+                else:
                     civiles()
             else:
                 RobotS('ChapinRescue')
@@ -354,12 +354,12 @@ def MostrarRobot():
         if Lista_Robots.RetornarRobot(corobot.get()).tipo == 'ChapinFighter':
             if len(Lista_Ciudades.retornarNodo(cociudades.get()).recursos) == 0:
                 messagebox.showinfo("Error","No se puede realizar misiones de extracción de recursos porque esta ciudad no cuenta con recursos.")
-            elif len(Lista_Ciudades.retornarNodo(cociudades.get()).recursos) > 1:
+            else:
                 recursos()
         elif Lista_Robots.RetornarRobot(corobot.get()).tipo == 'ChapinRescue':
             if len(Lista_Ciudades.retornarNodo(cociudades.get()).civiles) == 0:
                 messagebox.showinfo("Error","No se puede realizar misiones de rescate porque esta ciudad no cuenta con Unidades Civiles")
-            elif len(Lista_Ciudades.retornarNodo(cociudades.get()).civiles) > 1:
+            else:
                 civiles()
     elif corobot.get() == "":
         messagebox.showinfo("Error","No ha seleccionado ninguna opcion")
@@ -476,6 +476,8 @@ def startmision():
         entrada = Lista_Ciudades.retornarNodo(cociudades.get()).entradas.retornarNodo(int(costart.current()) + 1)
         civil = Lista_Ciudades.retornarNodo(cociudades.get()).civiles.retornarNodo(int(cocivil.current()) + 1)
         Lista_Ciudades.Mision_Rescate(cociudades.get(),entrada.x,entrada.y,civil.x,civil.y,Lista_Robots.RetornarRobot(corobot.get()))
+    else:
+        messagebox.showinfo("Error","No se puede realizar la mision")
 
 def bstart():
     global botstart

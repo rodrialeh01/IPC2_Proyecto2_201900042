@@ -3,7 +3,7 @@
     <listaCiudades>
         <ciudad>
             <nombre filas="10" columnas="10">CentralCity</nombre>
-            <fila numero="1">"****  C***"</fila>
+            <fila numero="1">"****  ****"</fila>
             <fila numero="2">"** * *****"</fila>
             <fila numero="3">"** * **  R"</fila>
             <fila numero="4">"E       **"</fila>

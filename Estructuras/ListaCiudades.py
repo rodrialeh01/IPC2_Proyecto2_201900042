@@ -1461,6 +1461,9 @@ class ListaCiudades:
 
         robot.capacidad = aux
 
+    def __len__(self):
+        return self.tamanio
+
 '''
     def Rescate(self, celda, destino):
         contador = 0
@@ -1537,8 +1540,5 @@ class ListaCiudades:
         elif pos == 'ar':
             celda = celda.arriba
             return celda
-
 '''
-
-    def __len__(self):
-        return self.tamanio
+    

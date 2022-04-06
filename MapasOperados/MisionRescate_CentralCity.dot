@@ -13,7 +13,7 @@ digraph structs {
 <TD bgcolor="black">   </TD>
 <TD>   </TD>
 <TD>   </TD>
-<TD bgcolor="royalblue1">   </TD>
+<TD bgcolor="black">   </TD>
 <TD bgcolor="black">   </TD>
 <TD bgcolor="black">   </TD>
 <TD bgcolor="black">   </TD></TR>
@@ -124,7 +124,7 @@ digraph structs {
 <TD>   </TD>
 <TD bgcolor="black">   </TD>
 <TD bgcolor="black">   </TD>
-<TD bgcolor="black">   </TD></TR></TABLE>>]fontname="Roboto Condensed"fontsize="20pt"label="Tipo de Mision: Rescate\nUnidad Civil Rescatada: 7,10\nRobot Utilizado: Rescatador2(ChapinRescue)"
+<TD bgcolor="black">   </TD></TR></TABLE>>]fontname="Roboto Condensed"fontsize="20pt"label="Tipo de Mision: Rescate\nUnidad Civil Rescatada: 7,10\nRobot Utilizado: Rescatador1(ChapinRescue)"
 info1[fontname="Roboto Condensed"fontsize="15pt", label=<
 <TABLE BORDER="0" CELLBORDER="0" CELLSPACING="3" CELLPADDING="10">
 <TR>
