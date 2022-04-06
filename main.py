@@ -281,10 +281,6 @@ def tipoR():
             elif Lista_Robots.CantidadporTipo('ChapinFighter') == 1:
                 if len(Lista_Ciudades.retornarNodo(cociudades.get()).recursos) == 0:
                     messagebox.showinfo("Error","No se puede realizar misiones de extracción de recursos porque esta ciudad no cuenta con recursos.")
-                elif len(Lista_Ciudades.retornarNodo(cociudades.get()).recursos) == 1:
-                    mre = messagebox.askyesno("Success","Solo existe el recurso con ID: " + str(Lista_Ciudades.retornarNodo(cociudades.get()).recursos.cabeza.id))
-                    if mre == True:
-                        print('OLI')
                 elif len(Lista_Ciudades.retornarNodo(cociudades.get()).recursos) > 1:
                     recursos()
             else:
@@ -305,10 +301,6 @@ def tipoR():
             elif Lista_Robots.CantidadporTipo('ChapinRescue') == 1:
                 if len(Lista_Ciudades.retornarNodo(cociudades.get()).civiles) == 0:
                     messagebox.showinfo("Error","No se puede realizar misiones de rescate porque esta ciudad no cuenta con Unidades Civiles")
-                elif len(Lista_Ciudades.retornarNodo(cociudades.get()).civiles) == 1:
-                    mciv = messagebox.askyesno("Success","Solo existe la unidad civil con ID: " + str(Lista_Ciudades.retornarNodo(cociudades.get()).civiles.cabeza.id))
-                    if mciv == True:
-                        print('OLIS')
                 elif len(Lista_Ciudades.retornarNodo(cociudades.get()).civiles) > 1:
                     civiles()
             else:
@@ -362,19 +354,11 @@ def MostrarRobot():
         if Lista_Robots.RetornarRobot(corobot.get()).tipo == 'ChapinFighter':
             if len(Lista_Ciudades.retornarNodo(cociudades.get()).recursos) == 0:
                 messagebox.showinfo("Error","No se puede realizar misiones de extracción de recursos porque esta ciudad no cuenta con recursos.")
-            elif len(Lista_Ciudades.retornarNodo(cociudades.get()).recursos) == 1:
-                mre = messagebox.askyesno("Success","Solo existe el recurso con ID: " + str(Lista_Ciudades.retornarNodo(cociudades.get()).recursos.cabeza.id))
-                if mre == True:
-                    print('OLI')
             elif len(Lista_Ciudades.retornarNodo(cociudades.get()).recursos) > 1:
                 recursos()
         elif Lista_Robots.RetornarRobot(corobot.get()).tipo == 'ChapinRescue':
             if len(Lista_Ciudades.retornarNodo(cociudades.get()).civiles) == 0:
                 messagebox.showinfo("Error","No se puede realizar misiones de rescate porque esta ciudad no cuenta con Unidades Civiles")
-            elif len(Lista_Ciudades.retornarNodo(cociudades.get()).civiles) == 1:
-                mciv = messagebox.askyesno("Success","Solo existe la unidad civil con ID: " + str(Lista_Ciudades.retornarNodo(cociudades.get()).civiles.cabeza.id))
-                if mciv == True:
-                    print('OLIS')
             elif len(Lista_Ciudades.retornarNodo(cociudades.get()).civiles) > 1:
                 civiles()
     elif corobot.get() == "":

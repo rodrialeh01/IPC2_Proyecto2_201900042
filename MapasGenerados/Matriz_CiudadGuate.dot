@@ -11,9 +11,9 @@ digraph structs {
 <TD bgcolor="black">   </TD>
 <TD bgcolor="black">   </TD>
 <TD bgcolor="black">   </TD>
-<TD>   </TD>
-<TD>   </TD>
-<TD bgcolor="royalblue1">   </TD>
+<TD bgcolor="black">   </TD>
+<TD bgcolor="black">   </TD>
+<TD bgcolor="black">   </TD>
 <TD bgcolor="black">   </TD>
 <TD bgcolor="black">   </TD>
 <TD bgcolor="black">   </TD></TR>
@@ -21,36 +21,36 @@ digraph structs {
         <TD border="0">2</TD>
 <TD bgcolor="black">   </TD>
 <TD bgcolor="black">   </TD>
+<TD bgcolor="black">   </TD>
+<TD>   </TD>
+<TD bgcolor="red3">   </TD>
+<TD>   </TD>
+<TD bgcolor="royalblue1">   </TD>
+<TD>   </TD>
+<TD>   </TD>
+<TD bgcolor="grey39">   </TD></TR>
+<TR>
+        <TD border="0">3</TD>
+<TD bgcolor="black">   </TD>
+<TD bgcolor="black">   </TD>
+<TD bgcolor="black">   </TD>
 <TD>   </TD>
 <TD bgcolor="black">   </TD>
-<TD bgcolor="red3">   </TD>
 <TD bgcolor="black">   </TD>
 <TD bgcolor="black">   </TD>
 <TD bgcolor="black">   </TD>
 <TD bgcolor="black">   </TD>
 <TD bgcolor="black">   </TD></TR>
 <TR>
-        <TD border="0">3</TD>
-<TD bgcolor="black">   </TD>
-<TD bgcolor="black">   </TD>
-<TD>   </TD>
-<TD bgcolor="black">   </TD>
-<TD>   </TD>
-<TD bgcolor="black">   </TD>
-<TD bgcolor="black">   </TD>
-<TD>   </TD>
-<TD>   </TD>
-<TD bgcolor="grey39">   </TD></TR>
-<TR>
         <TD border="0">4</TD>
-<TD bgcolor="yellowgreen">   </TD>
+<TD bgcolor="black">   </TD>
+<TD bgcolor="black">   </TD>
+<TD bgcolor="black">   </TD>
 <TD>   </TD>
-<TD>   </TD>
-<TD>   </TD>
-<TD>   </TD>
-<TD>   </TD>
-<TD>   </TD>
-<TD>   </TD>
+<TD bgcolor="black">   </TD>
+<TD bgcolor="black">   </TD>
+<TD bgcolor="black">   </TD>
+<TD bgcolor="black">   </TD>
 <TD bgcolor="black">   </TD>
 <TD bgcolor="black">   </TD></TR>
 <TR>
@@ -58,58 +58,58 @@ digraph structs {
 <TD bgcolor="black">   </TD>
 <TD bgcolor="black">   </TD>
 <TD bgcolor="black">   </TD>
-<TD bgcolor="black">   </TD>
-<TD bgcolor="black">   </TD>
-<TD bgcolor="black">   </TD>
-<TD bgcolor="black">   </TD>
-<TD>   </TD>
-<TD bgcolor="black">   </TD>
-<TD bgcolor="black">   </TD></TR>
-<TR>
-        <TD border="0">6</TD>
-<TD bgcolor="grey39">   </TD>
-<TD>   </TD>
-<TD>   </TD>
-<TD>   </TD>
 <TD>   </TD>
 <TD bgcolor="red3">   </TD>
 <TD>   </TD>
 <TD>   </TD>
+<TD>   </TD>
+<TD bgcolor="royalblue1">   </TD>
+<TD bgcolor="black">   </TD></TR>
+<TR>
+        <TD border="0">6</TD>
+<TD bgcolor="yellowgreen">   </TD>
+<TD>   </TD>
+<TD>   </TD>
+<TD>   </TD>
+<TD bgcolor="black">   </TD>
+<TD bgcolor="black">   </TD>
+<TD bgcolor="black">   </TD>
+<TD bgcolor="black">   </TD>
 <TD bgcolor="black">   </TD>
 <TD bgcolor="black">   </TD></TR>
 <TR>
         <TD border="0">7</TD>
 <TD bgcolor="black">   </TD>
 <TD bgcolor="black">   </TD>
-<TD>   </TD>
-<TD bgcolor="black">   </TD>
-<TD bgcolor="black">   </TD>
-<TD bgcolor="black">   </TD>
 <TD bgcolor="black">   </TD>
 <TD>   </TD>
-<TD>   </TD>
-<TD bgcolor="royalblue1">   </TD></TR>
+<TD bgcolor="black">   </TD>
+<TD bgcolor="black">   </TD>
+<TD bgcolor="black">   </TD>
+<TD bgcolor="black">   </TD>
+<TD bgcolor="black">   </TD>
+<TD bgcolor="black">   </TD></TR>
 <TR>
         <TD border="0">8</TD>
 <TD bgcolor="black">   </TD>
 <TD bgcolor="black">   </TD>
-<TD>   </TD>
-<TD bgcolor="black">   </TD>
-<TD bgcolor="black">   </TD>
 <TD bgcolor="black">   </TD>
 <TD>   </TD>
-<TD>   </TD>
 <TD bgcolor="black">   </TD>
-<TD bgcolor="black">   </TD></TR>
+<TD bgcolor="black">   </TD>
+<TD bgcolor="black">   </TD>
+<TD bgcolor="black">   </TD>
+<TD bgcolor="black">   </TD>
+<TD bgcolor="royalblue1">   </TD></TR>
 <TR>
         <TD border="0">9</TD>
 <TD bgcolor="black">   </TD>
 <TD bgcolor="black">   </TD>
-<TD>   </TD>
-<TD bgcolor="black">   </TD>
-<TD bgcolor="black">   </TD>
 <TD bgcolor="black">   </TD>
 <TD>   </TD>
+<TD bgcolor="black">   </TD>
+<TD bgcolor="black">   </TD>
+<TD bgcolor="black">   </TD>
 <TD bgcolor="black">   </TD>
 <TD bgcolor="black">   </TD>
 <TD bgcolor="black">   </TD></TR>
@@ -117,12 +117,12 @@ digraph structs {
         <TD border="0">10</TD>
 <TD bgcolor="black">   </TD>
 <TD bgcolor="black">   </TD>
-<TD bgcolor="yellowgreen">   </TD>
-<TD bgcolor="black">   </TD>
-<TD bgcolor="black">   </TD>
 <TD bgcolor="black">   </TD>
 <TD>   </TD>
-<TD bgcolor="black">   </TD>
-<TD bgcolor="black">   </TD>
-<TD bgcolor="black">   </TD></TR></TABLE>>]fontname="Roboto Condensed"fontsize="35pt"label="CentralCity"
+<TD>   </TD>
+<TD>   </TD>
+<TD>   </TD>
+<TD>   </TD>
+<TD>   </TD>
+<TD bgcolor="grey39">   </TD></TR></TABLE>>]fontname="Roboto Condensed"fontsize="35pt"label="CiudadGuate"
 }

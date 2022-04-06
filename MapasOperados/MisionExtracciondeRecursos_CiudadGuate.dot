@@ -1,0 +1,163 @@
+digraph structs {
+	node [shape=plaintext]
+	patron [fontname="Roboto Condensed"fontsize="15pt", label=<
+<TABLE BORDER="0" CELLBORDER="0" CELLSPACING="2" CELLPADDING="10">
+<TR>
+    <TD border="0">CiudadGuate</TD><TD border="0">1</TD><TD border="0">2</TD><TD border="0">3</TD><TD border="0">4</TD><TD border="0">5</TD><TD border="0">6</TD><TD border="0">7</TD><TD border="0">8</TD><TD border="0">9</TD><TD border="0">10</TD>
+</TR>
+<TR>
+        <TD border="0">1</TD>
+<TD bgcolor="black">   </TD>
+<TD bgcolor="black">   </TD>
+<TD bgcolor="black">   </TD>
+<TD bgcolor="black">   </TD>
+<TD bgcolor="black">   </TD>
+<TD bgcolor="black">   </TD>
+<TD bgcolor="black">   </TD>
+<TD bgcolor="black">   </TD>
+<TD bgcolor="black">   </TD>
+<TD bgcolor="black">   </TD></TR>
+<TR>
+        <TD border="0">2</TD>
+<TD bgcolor="black">   </TD>
+<TD bgcolor="black">   </TD>
+<TD bgcolor="black">   </TD>
+<TD>   </TD>
+<TD bgcolor="red3">   </TD>
+<TD>   </TD>
+<TD bgcolor="royalblue1">   </TD>
+<TD>   </TD>
+<TD>   </TD>
+<TD bgcolor="grey39">   </TD></TR>
+<TR>
+        <TD border="0">3</TD>
+<TD bgcolor="black">   </TD>
+<TD bgcolor="black">   </TD>
+<TD bgcolor="black">   </TD>
+<TD>   </TD>
+<TD bgcolor="black">   </TD>
+<TD bgcolor="black">   </TD>
+<TD bgcolor="black">   </TD>
+<TD bgcolor="black">   </TD>
+<TD bgcolor="black">   </TD>
+<TD bgcolor="black">   </TD></TR>
+<TR>
+        <TD border="0">4</TD>
+<TD bgcolor="black">   </TD>
+<TD bgcolor="black">   </TD>
+<TD bgcolor="black">   </TD>
+<TD>   </TD>
+<TD bgcolor="black">   </TD>
+<TD bgcolor="black">   </TD>
+<TD bgcolor="black">   </TD>
+<TD bgcolor="black">   </TD>
+<TD bgcolor="black">   </TD>
+<TD bgcolor="black">   </TD></TR>
+<TR>
+        <TD border="0">5</TD>
+<TD bgcolor="black">   </TD>
+<TD bgcolor="black">   </TD>
+<TD bgcolor="black">   </TD>
+<TD>   </TD>
+<TD bgcolor="red3">   </TD>
+<TD>   </TD>
+<TD>   </TD>
+<TD>   </TD>
+<TD bgcolor="royalblue1">   </TD>
+<TD bgcolor="black">   </TD></TR>
+<TR>
+        <TD border="0">6</TD>
+<TD bgcolor="yellowgreen">   </TD>
+<TD bgcolor="goldenrod">   </TD>
+<TD bgcolor="goldenrod">   </TD>
+<TD bgcolor="goldenrod">   </TD>
+<TD bgcolor="black">   </TD>
+<TD bgcolor="black">   </TD>
+<TD bgcolor="black">   </TD>
+<TD bgcolor="black">   </TD>
+<TD bgcolor="black">   </TD>
+<TD bgcolor="black">   </TD></TR>
+<TR>
+        <TD border="0">7</TD>
+<TD bgcolor="black">   </TD>
+<TD bgcolor="black">   </TD>
+<TD bgcolor="black">   </TD>
+<TD bgcolor="goldenrod">   </TD>
+<TD bgcolor="black">   </TD>
+<TD bgcolor="black">   </TD>
+<TD bgcolor="black">   </TD>
+<TD bgcolor="black">   </TD>
+<TD bgcolor="black">   </TD>
+<TD bgcolor="black">   </TD></TR>
+<TR>
+        <TD border="0">8</TD>
+<TD bgcolor="black">   </TD>
+<TD bgcolor="black">   </TD>
+<TD bgcolor="black">   </TD>
+<TD bgcolor="goldenrod">   </TD>
+<TD bgcolor="black">   </TD>
+<TD bgcolor="black">   </TD>
+<TD bgcolor="black">   </TD>
+<TD bgcolor="black">   </TD>
+<TD bgcolor="black">   </TD>
+<TD bgcolor="royalblue1">   </TD></TR>
+<TR>
+        <TD border="0">9</TD>
+<TD bgcolor="black">   </TD>
+<TD bgcolor="black">   </TD>
+<TD bgcolor="black">   </TD>
+<TD bgcolor="goldenrod">   </TD>
+<TD bgcolor="black">   </TD>
+<TD bgcolor="black">   </TD>
+<TD bgcolor="black">   </TD>
+<TD bgcolor="black">   </TD>
+<TD bgcolor="black">   </TD>
+<TD bgcolor="black">   </TD></TR>
+<TR>
+        <TD border="0">10</TD>
+<TD bgcolor="black">   </TD>
+<TD bgcolor="black">   </TD>
+<TD bgcolor="black">   </TD>
+<TD bgcolor="goldenrod">   </TD>
+<TD bgcolor="goldenrod">   </TD>
+<TD bgcolor="goldenrod">   </TD>
+<TD bgcolor="goldenrod">   </TD>
+<TD bgcolor="goldenrod">   </TD>
+<TD bgcolor="goldenrod">   </TD>
+<TD bgcolor="grey39">   </TD></TR></TABLE>>]fontname="Roboto Condensed"fontsize="20pt"label="Tipo de Mision: Extraccion de Recursos\nRecurso Extraido: 10,10\nRobot Utilizado: MaxSteel(ChapinFighter - Capacidad de combate inicial 10, Capacidad de combate final 10)"
+info1[fontname="Roboto Condensed"fontsize="15pt", label=<
+<TABLE BORDER="0" CELLBORDER="0" CELLSPACING="3" CELLPADDING="10">
+<TR>
+    <TD border="0" bgcolor="yellowgreen"></TD> 
+    <TD border="0">Camino de Entrada </TD> 
+</TR>
+<TR>
+    <TD border="0" bgcolor="black"></TD> 
+    <TD border="0">Intransitable </TD> 
+</TR>
+<TR>
+    <TD border="0" bgcolor="royalblue1"></TD> 
+    <TD border="0">Unidad Civil</TD> 
+</TR>
+<TR>
+    <TD border="0" bgcolor="red3"></TD> 
+    <TD border="0">Unidad Militar</TD> 
+</TR>
+<TR>
+    <TD border="0" bgcolor="grey39"></TD> 
+    <TD border="0">Recurso</TD> 
+</TR>
+<TR>
+    <TD border="0" bgcolor="white"></TD> 
+    <TD border="0">Camino</TD> 
+</TR>
+<TR>
+    <TD border="0" bgcolor="goldenrod"></TD> 
+    <TD border="0">Camino del Robot</TD> 
+</TR>
+<TR>
+    <TD border="0" bgcolor="orangered"></TD> 
+    <TD border="0">Unidad Militar derrotada</TD> 
+</TR>
+</TABLE>>]
+}

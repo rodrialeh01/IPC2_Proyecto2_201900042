@@ -1,6 +1,7 @@
 from .MatrizDispersa import MatrizDispersa
 from .NodoCiudad import NodoCiudad
 from .NodoCelda import NodoCelda
+from .Pila import Pila
 from tkinter import messagebox
 import os
 class ListaCiudades:
@@ -764,6 +765,7 @@ class ListaCiudades:
             self.GraficarMatrizRescate(matriz_aux, ciudad.nombre, robot,unidadcivil)
         else:
             messagebox.showinfo("Error","No se pudo realizar la mision :(")
+            self.GraficarMatrizRescate(matriz_aux, ciudad.nombre, robot,unidadcivil)
 
 
 #TODO ----------------------------------------------------------------- METODO PARA MISION DE RECURSOS ----------------------------------------------------------------------
@@ -1453,9 +1455,90 @@ class ListaCiudades:
         if actual == recurso:
             messagebox.showinfo("Success","Mision cumplida!, Logramos extraer los recursos de la ciudad")
             self.GraficarMatrizExtraccionRecursos(matriz_aux,nombrec,robot,recurso,capinicial,aux)
+        else:
+            messagebox.showinfo("Fail","No se pudo completar la mision :(")
+            self.GraficarMatrizExtraccionRecursos(matriz_aux,nombrec,robot,recurso,capinicial,aux)
 
         robot.capacidad = aux
 
+'''
+    def Rescate(self, celda, destino):
+        contador = 0
+        Camino = Pila()
+        if celda.izquierda == destino:
+            Camino.Apilar(celda)
+            contador += 1
+            return Camino
+        elif celda.derecha == destino:
+            Camino.Apilar(celda)
+            contador += 1
+            return Camino
+        elif celda.abajo == destino:
+            Camino.Apilar(celda)
+            contador += 1
+            return Camino
+        elif celda.arriba == destino:
+            Camino.Apilar(celda)
+            contador += 1
+        elif celda.arriba.caracter != ' ' and celda.abajo.caracter != ' ' and celda.derecha.caracter == ' ':
+            Camino.Apilar(Mover('d',celda))
+            contador += 1
+        elif celda.derecha.caracter != ' ' and celda.arriba.caracter != ' ' and celda.abajo.caracter == ' ':
+            Camino.Apilar(Mover('ab',celda))
+            contador += 1
+        elif celda.derecha.caracter != ' ' and celda.abajo.caracter != ' ' and celda.arriba.caracter == ' ':
+            Camino.Apilar(Mover('ar',celda))
+            contador += 1
+
+        #!VERIFICACION ARRIBA-ABAJO
+        elif celda.arriba.caracter == ' ' and celda.abajo.caracter == ' ' and celda.derecha.caracter != ' ':
+            contador = 0
+            if celda.abajo.caracter == ' ':
+                Camino.Apilar(Mover('ab',celda))
+                contador += 1
+                if celda.
+            elif celda.arriba.caracter == ' ':
+                Camino.Apilar(Mover('ar',celda))
+                contador += 1
+            else:
+                
+
+        #?VERIFICACION DERECHA-ARRIBA
+        elif celda.derecha.caracter == ' ' and celda.arriba.caracter == ' ' and celda.abajo.caracter != ' ':
+            resta_actualx = unidadcivil.x - actual.x
+            resta_arriba = unidadcivil.x - actual.arriba.x
+            if abs(resta_arriba) < abs(resta_actualx):
+                actual = actual.arriba
+                actual.caracter = 'P'
+            else:
+                actual = actual.derecha
+                actual.caracter = 'P'
+        #!VERIFICACION DERECHA-ABAJO
+        elif celda.derecha.caracter == ' ' and celda.abajo.caracter == ' '  and celda.arriba.caracter != ' ':
+            resta_actualx = unidadcivil.x - actual.x
+            resta_abajo = unidadcivil.x - actual.abajo.x
+            if abs(resta_abajo) < abs(resta_actualx):
+                actual = actual.abajo
+                actual.caracter = 'P'
+            else:
+                actual = actual.derecha
+                actual.caracter = 'P'
+
+    def Mover(self, pos, celda):
+        if pos == 'd':
+            celda = celda.derecha
+            return celda
+        elif pos == 'i':
+            celda = celda.izquierda
+            return celda
+        elif pos == 'ab':
+            celda = celda.abajo
+            return celda
+        elif pos == 'ar':
+            celda = celda.arriba
+            return celda
+
+'''
 
     def __len__(self):
         return self.tamanio
