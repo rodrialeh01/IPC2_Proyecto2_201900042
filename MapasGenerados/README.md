@@ -1,0 +1,2 @@
+# Mapas Generados
+En esta carpeta se encuentran todas las ciudades ya graficadas para mostrarlas en la interfaz grafica de Python y poder abrirlo en el programa y tienen el formato de Matriz_NombreCiudad.
